@@ -1,16 +1,16 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-07T18:15:20.752Z",
+  "generated_at": "2026-11-07T19:04:26.749Z",
   "source": "journal d'autonomie, bench et tests du dépôt pecorio-dev/Hastria",
   "repo": {
     "url": "https://github.com/pecorio-dev/Hastria",
     "branch": "autonomy/self-improve-2026-11-07T15-50"
   },
   "project": {
-    "iterations": 117,
+    "iterations": 132,
     "strategies": 14,
-    "files": 587,
-    "loc": 80517
+    "files": 598,
+    "loc": 85624
   },
   "tests": {
     "count": 1396,
@@ -73,7 +73,7 @@
     ]
   },
   "cost": {
-    "loop_usd": 1.4414,
+    "loop_usd": 1.7132,
     "loop_cap_usd": 20
   },
   "autonomy": {
@@ -521,41 +521,101 @@
       {
         "iteration": 117,
         "usd": 1.4414
+      },
+      {
+        "iteration": 118,
+        "usd": 1.4476
+      },
+      {
+        "iteration": 119,
+        "usd": 1.4612
+      },
+      {
+        "iteration": 120,
+        "usd": 1.5108
+      },
+      {
+        "iteration": 121,
+        "usd": 1.514
+      },
+      {
+        "iteration": 122,
+        "usd": 1.5325
+      },
+      {
+        "iteration": 123,
+        "usd": 1.5783
+      },
+      {
+        "iteration": 124,
+        "usd": 1.5918
+      },
+      {
+        "iteration": 125,
+        "usd": 1.6108
+      },
+      {
+        "iteration": 126,
+        "usd": 1.6186
+      },
+      {
+        "iteration": 127,
+        "usd": 1.6333
+      },
+      {
+        "iteration": 128,
+        "usd": 1.6366
+      },
+      {
+        "iteration": 129,
+        "usd": 1.6527
+      },
+      {
+        "iteration": 130,
+        "usd": 1.6527
+      },
+      {
+        "iteration": 131,
+        "usd": 1.6682
+      },
+      {
+        "iteration": 132,
+        "usd": 1.7132
       }
     ],
     "branch": "autonomy/self-improve-2026-11-07T15-50",
-    "runs": 111
+    "runs": 126
   },
   "commits": [
     {
-      "sha": "c408f45",
-      "subject": "IDE : Espace Stratégies refondu (cartes lisibles, règle de fermeture, mesures réelles), Overview enrichi (4 cartes + sparkline, cercle de dépense corrigé), logo oméga du design de référence en sidebar, slogan système, route de repli",
-      "at": "2026-11-07T19:13:30+01:00"
+      "sha": "02b344a",
+      "subject": "autonomy(it-132): CHANTIER: Réparation du rouge it-131 et clôture R3c-12 — le lancement réel porte le bracket pairwise de juges (s7) : con",
+      "at": "2026-11-07T20:03:14+01:00"
     },
     {
-      "sha": "4e40089",
-      "subject": "autonomy(it-117): CHANTIER: Cohérence doc s14 (R24 + fiche de ligne) et R3c-1 — harnais de lancement réel du runtime (`runtime/harness.ts`",
-      "at": "2026-11-07T19:12:42+01:00"
+      "sha": "3659c96",
+      "subject": "autonomy(it-131): WIP tests rouges — prochaine itération répare — CHANTIER: R3c-12 — le lancement réel du runtime porte s7 (bracket pairwise de ju",
+      "at": "2026-11-07T20:00:54+01:00"
     },
     {
-      "sha": "5cac0d5",
-      "subject": "autonomy(it-116): \",\"time\":{\"start\":1794074887518,\"end\":1794074891605}}} | {\"type\":\"step_finish\",\"timestamp\":1794074891622,\"sessionID\":\"se",
-      "at": "2026-11-07T19:08:13+01:00"
+      "sha": "6caf110",
+      "subject": "autonomy(it-130): {\"type\":\"error\",\"timestamp\":1794077824524,\"sessionID\":\"\",\"error\":{\"type\":\"unknown\",\"message\":\"Transport: ECONNRESET: The",
+      "at": "2026-11-07T19:57:05+01:00"
     },
     {
-      "sha": "e1b1a2c",
-      "subject": "autonomy(it-115): CHANTIER: s14 « comité de contrats » — cœur pur `omega/contract-committee.ts` (un membre par contrat, décision univoque,",
-      "at": "2026-11-07T19:06:08+01:00"
+      "sha": "436cd04",
+      "subject": "autonomy(it-129): {\"type\":\"step_start\",\"timestamp\":1794077534419,\"sessionID\":\"ses_e48a55b47ffeCSSirCfafcHi4R\",\"part\":{\"id\":\"prt_1b75aa8d30",
+      "at": "2026-11-07T19:56:56+01:00"
     },
     {
-      "sha": "32f9489",
-      "subject": "autonomy(it-114): CHANTIER: skillstore — cœur pur de la liste chaude plafonnée par le budget de contexte mesuré (protocole s11, design §5",
-      "at": "2026-11-07T19:03:16+01:00"
+      "sha": "fce4768",
+      "subject": "autonomy(it-128): CHANTIER: R3c-10 — la sélection best-of-N (s1) est portée par le lancement réel du runtime (configuration déclarative +",
+      "at": "2026-11-07T19:52:13+01:00"
     },
     {
-      "sha": "775a1b7",
-      "subject": "autonomy(it-113): CHANTIER: Modèle de contenu versionné des packs du site cumulé (`site/packs.ts`) + publication par le build statique ave",
-      "at": "2026-11-07T19:01:09+01:00"
+      "sha": "e06b0d3",
+      "subject": "autonomy(it-127): CHANTIER: R3c-9 — le lancement réel du runtime porte l'ambition bornée (s10, design §10) : configuration déclarative + a",
+      "at": "2026-11-07T19:48:40+01:00"
     }
   ]
 }

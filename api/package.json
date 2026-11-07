@@ -1,0 +1,11 @@
+{
+  "name": "hastria-site-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "API publique de hastria.fun — GET /v1/stats, GET /v1/health",
+  "module": "server.ts",
+  "scripts": {
+    "start": "bun run server.ts"
+  }
+}

@@ -37,6 +37,20 @@ Le binaire Tailwind utilisé par défaut est celui du dépôt omega
 (`../opencode-omega/desktop/node_modules/.bin/tailwindcss`, v3.4.17).
 `OMEGA_ROOT` permet de pointer `build-stats.mjs` vers un autre clone du dépôt.
 
+## Déploiement (VPS, en production)
+
+Le site et son API sont **déployés et servis par le VPS** (82.165.188.202) :
+
+- Statique : `/var/www/hastria.fun/` (`index.html`, `stats.json`, `robots.txt`, `sitemap.xml`, `assets/`).
+- API `api/server.ts` (Bun) : service systemd `hastria-site-api` sur `127.0.0.1:8790`
+  (MemoryMax=256M), exposé par nginx via `location /v1/` dans le vhost `hastria.fun`.
+- Vérifications : `https://hastria.fun/v1/health` → `{"ok":true}`,
+  `https://hastria.fun/v1/stats` → JSON réel du projet. Le site lit `/v1/stats`
+  en premier et retombe sur `./stats.json` si l'API n'est pas joignable.
+
+Mise à jour des mesures : `node scripts/build-stats.mjs` puis copier `stats.json`
+sur le VPS (et `/opt/hastria-site-api/stats.json` pour l'API).
+
 ## Déploiement (nginx)
 
 Copier à la racine du domaine : `index.html`, `stats.json`, `robots.txt`,
