@@ -152,6 +152,7 @@ function applyStats(s) {
 
   if ($("heroStatusChip")) $("heroStatusChip").textContent = "● SOURCE PUBLIQUE — SYNCHRO " + synced;
   if ($("heroApiBadge")) { $("heroApiBadge").textContent = "SNAPSHOT PUBLIC"; }
+  if ($("liveTerminal")) $("liveTerminal").innerHTML = 'GET /v1/stats → stats.json<br><span class="text-white/60">synchronisé le ' + synced + "</span>";
   if ($("heroIt")) $("heroIt").textContent = fmt(p.iterations);
   if ($("heroTests")) $("heroTests").textContent = fmt(t.count);
   if ($("heroBench")) $("heroBench").textContent = fmt(combos.length);
@@ -189,6 +190,7 @@ function statsUnavailable() {
   var unavailable = '<div class="state-empty">Source de statistiques indisponible pour le moment.<br>Ce site n\'affiche jamais de chiffres inventés — revenez un peu plus tard ou consultez le <a class="underline text-white" href="' + CFG.repo + '" target="_blank" rel="noopener">dépôt public</a>.</div>';
   if ($("heroStatusChip")) $("heroStatusChip").textContent = "● SOURCE PUBLIQUE — INDISPONIBLE";
   if ($("heroApiBadge")) $("heroApiBadge").textContent = "INDISPONIBLE";
+  if ($("liveTerminal")) $("liveTerminal").innerHTML = 'GET /v1/stats → stats.json<br><span class="text-white/60">source indisponible — rien n\'est affiché tant qu\'elle n\'est pas joignable</span>';
   if ($("heroSync")) $("heroSync").textContent = "aucune valeur affichée tant que la source n'est pas joignable";
   if ($("topLatency")) $("topLatency").textContent = "source indisponible";
   if ($("topDot")) $("topDot").className = "w-2 h-2 bg-amber-400 rounded-full";
@@ -533,7 +535,7 @@ function exportBuilder() {
 function initMarquee() {
   var el = $("marquee"); if (!el) return;
   var items = ["MULTI-MODÈLES", "STATS PUBLIQUES", "CODE OUVERT", "ROUTAGE MESURÉ", "BUILDER PRO + EXPORT", "BRANCHEMENT À SCOPES", "COMPTES VÉRIFIÉS", "STORE — EN CONSTRUCTION"];
-  var seq = items.map(function (i) { return '<span class="mx-5 inline-flex items-center gap-5">' + i + ' <span class="text-[#7C6CFF]">·</span></span>'; }).join("");
+  var seq = items.map(function (i) { return '<span class="mx-5 inline-flex items-center gap-5">' + i + ' <span class="text-[#7C6CFF]">✦</span></span>'; }).join("");
   el.innerHTML = '<div class="flex shrink-0">' + seq + '</div><div class="flex shrink-0">' + seq + "</div>";
 }
 function initVerifiedList() {
