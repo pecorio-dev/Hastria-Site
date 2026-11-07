@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Hastria — carte Open Graph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  /* Rendu 2x : viewport 600x315 -> PNG 1200x630 */
+  html,body{width:600px;height:315px;overflow:hidden}
+  body{
+    position:relative;
+    background:#07070B;
+    color:#F4F1EA;
+    font-family:Inter,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* --- Halos radiaux + fond --- */
+  .bg{
+    position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(520px 320px at 8% -12%, rgba(124,108,255,.28), transparent 60%),
+      radial-gradient(460px 320px at 104% 18%, rgba(0,232,184,.18), transparent 60%),
+      radial-gradient(420px 300px at 50% 122%, rgba(255,179,64,.12), transparent 62%),
+      #07070B;
+  }
+  /* --- Fine grille de lignes blanches 3,5% --- */
+  .grid{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:36px 36px;
+    -webkit-mask-image:radial-gradient(ellipse 94% 78% at 50% 8%, #000 28%, transparent 92%);
+    mask-image:radial-gradient(ellipse 94% 78% at 50% 8%, #000 28%, transparent 92%);
+  }
+  /* --- Cadre fin verre --- */
+  .frame{
+    position:absolute;inset:12px;border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;pointer-events:none;
+  }
+  /* --- Contenu --- */
+  .wrap{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:0 48px;
+    text-align:center;
+  }
+  .mark{
+    width:56px;height:56px;border-radius:16px;
+    background:#F4F1EA;color:#07070B;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:32px;line-height:1;
+    box-shadow:0 10px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.06);
+  }
+  h1{
+    margin-top:17px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;
+    font-size:57px;line-height:1;letter-spacing:.085em;
+    text-transform:uppercase;
+    background:linear-gradient(180deg,#FFFFFF 0%,#D8D3C6 88%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-indent:.085em; /* compense le letter-spacing final */
+  }
+  .sub{
+    margin-top:11px;
+    font-size:16px;font-weight:450;letter-spacing:.005em;
+    color:rgba(255,255,255,.65);
+  }
+  .dom{
+    margin-top:9px;
+    font-family:'JetBrains Mono',monospace;font-weight:500;
+    font-size:10.5px;letter-spacing:.30em;
+    color:rgba(255,255,255,.42);text-transform:lowercase;
+    text-indent:.30em;
+  }
+  /* --- Puces sobres --- */
+  .chips{
+    position:absolute;left:0;right:0;bottom:26px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .chip{
+    font-size:11.5px;font-weight:500;letter-spacing:.01em;
+    color:rgba(255,255,255,.68);
+    padding:6.5px 14px;border-radius:999px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.10);
+    white-space:nowrap;
+  }
+  .dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.22)}
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="grid"></div>
+  <div class="frame"></div>
+
+  <div class="wrap">
+    <div class="mark">H</div>
+    <h1>HASTRIA</h1>
+    <div class="sub">le système multi-modèles omega</div>
+    <div class="dom">hastria.fun</div>
+  </div>
+
+  <div class="chips">
+    <span class="chip">Stats publiques</span>
+    <span class="dot"></span>
+    <span class="chip">Code ouvert</span>
+    <span class="dot"></span>
+    <span class="chip">Builder pro</span>
+  </div>
+</body>
+</html>

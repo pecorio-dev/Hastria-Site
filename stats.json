@@ -1,0 +1,545 @@
+{
+  "schema": 1,
+  "generated_at": "2026-11-07T18:02:57.602Z",
+  "source": "journal d'autonomie, bench et tests du dépôt pecorio-dev/Hastria",
+  "repo": {
+    "url": "https://github.com/pecorio-dev/Hastria",
+    "branch": "autonomy/self-improve-2026-11-07T15-50"
+  },
+  "project": {
+    "iterations": 113,
+    "strategies": 14,
+    "files": 577,
+    "loc": 78389
+  },
+  "tests": {
+    "count": 1396,
+    "files": 101,
+    "assertions": 3487,
+    "fail": 0,
+    "at": "2026-11-07T17:43:18.408Z"
+  },
+  "bench": {
+    "tasks": 18,
+    "combos": [
+      {
+        "combo": "Flash·baseline",
+        "ok": 18,
+        "total": 18,
+        "rate": 100,
+        "cost": 0.06,
+        "sec": 260
+      },
+      {
+        "combo": "Pro·baseline",
+        "ok": 16,
+        "total": 16,
+        "rate": 100,
+        "cost": 0.859,
+        "sec": 566
+      },
+      {
+        "combo": "gpt-oss-20b·baseline",
+        "ok": 11,
+        "total": 18,
+        "rate": 61,
+        "cost": 0.051,
+        "sec": 372
+      },
+      {
+        "combo": "gpt-oss-20b·s1",
+        "ok": 15,
+        "total": 18,
+        "rate": 83,
+        "cost": 0.153,
+        "sec": 1943
+      },
+      {
+        "combo": "gpt-oss-20b·s4",
+        "ok": 17,
+        "total": 18,
+        "rate": 94,
+        "cost": 0.1,
+        "sec": 1426
+      },
+      {
+        "combo": "gpt-oss-20b·s6",
+        "ok": 17,
+        "total": 18,
+        "rate": 94,
+        "cost": 0.128,
+        "sec": 928
+      }
+    ]
+  },
+  "cost": {
+    "loop_usd": 1.3583,
+    "loop_cap_usd": 20
+  },
+  "autonomy": {
+    "history": [
+      {
+        "iteration": 7,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 8,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 9,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 10,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 11,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 12,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 13,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 14,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 15,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 16,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 17,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 18,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 19,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 20,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 21,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 22,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 23,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 24,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 25,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 26,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 27,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 28,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 29,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 30,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 31,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 32,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 33,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 34,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 35,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 36,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 37,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 38,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 39,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 40,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 41,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 42,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 43,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 44,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 45,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 46,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 47,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 48,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 49,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 50,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 51,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 52,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 53,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 54,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 55,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 56,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 57,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 58,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 59,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 60,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 61,
+        "usd": 0.0813
+      },
+      {
+        "iteration": 62,
+        "usd": 0.1215
+      },
+      {
+        "iteration": 63,
+        "usd": 0.1617
+      },
+      {
+        "iteration": 64,
+        "usd": 0.1866
+      },
+      {
+        "iteration": 65,
+        "usd": 0.2108
+      },
+      {
+        "iteration": 66,
+        "usd": 0.241
+      },
+      {
+        "iteration": 67,
+        "usd": 0.263
+      },
+      {
+        "iteration": 68,
+        "usd": 0.3319
+      },
+      {
+        "iteration": 69,
+        "usd": 0.3771
+      },
+      {
+        "iteration": 70,
+        "usd": 0.4026
+      },
+      {
+        "iteration": 71,
+        "usd": 0.4318
+      },
+      {
+        "iteration": 72,
+        "usd": 0.4585
+      },
+      {
+        "iteration": 73,
+        "usd": 0.5004
+      },
+      {
+        "iteration": 74,
+        "usd": 0.5164
+      },
+      {
+        "iteration": 75,
+        "usd": 0.5495
+      },
+      {
+        "iteration": 76,
+        "usd": 0.5743
+      },
+      {
+        "iteration": 77,
+        "usd": 0.6094
+      },
+      {
+        "iteration": 78,
+        "usd": 0.6281
+      },
+      {
+        "iteration": 79,
+        "usd": 0.6654
+      },
+      {
+        "iteration": 80,
+        "usd": 0.667
+      },
+      {
+        "iteration": 81,
+        "usd": 0.6844
+      },
+      {
+        "iteration": 82,
+        "usd": 0.7156
+      },
+      {
+        "iteration": 83,
+        "usd": 0.777
+      },
+      {
+        "iteration": 84,
+        "usd": 0.8298
+      },
+      {
+        "iteration": 85,
+        "usd": 0.8756
+      },
+      {
+        "iteration": 86,
+        "usd": 0.8974
+      },
+      {
+        "iteration": 87,
+        "usd": 0.9267
+      },
+      {
+        "iteration": 88,
+        "usd": 0.9448
+      },
+      {
+        "iteration": 89,
+        "usd": 0.9705
+      },
+      {
+        "iteration": 90,
+        "usd": 1.0131
+      },
+      {
+        "iteration": 91,
+        "usd": 1.0436
+      },
+      {
+        "iteration": 92,
+        "usd": 1.0842
+      },
+      {
+        "iteration": 93,
+        "usd": 1.1143
+      },
+      {
+        "iteration": 94,
+        "usd": 1.1267
+      },
+      {
+        "iteration": 95,
+        "usd": 1.1524
+      },
+      {
+        "iteration": 96,
+        "usd": 1.1648
+      },
+      {
+        "iteration": 97,
+        "usd": 1.1728
+      },
+      {
+        "iteration": 98,
+        "usd": 1.1845
+      },
+      {
+        "iteration": 99,
+        "usd": 1.1911
+      },
+      {
+        "iteration": 100,
+        "usd": 1.1952
+      },
+      {
+        "iteration": 101,
+        "usd": 1.206
+      },
+      {
+        "iteration": 102,
+        "usd": 1.2092
+      },
+      {
+        "iteration": 103,
+        "usd": 1.2144
+      },
+      {
+        "iteration": 104,
+        "usd": 1.2227
+      },
+      {
+        "iteration": 105,
+        "usd": 1.23
+      },
+      {
+        "iteration": 106,
+        "usd": 1.2397
+      },
+      {
+        "iteration": 107,
+        "usd": 1.2546
+      },
+      {
+        "iteration": 108,
+        "usd": 1.2852
+      },
+      {
+        "iteration": 109,
+        "usd": 1.3112
+      },
+      {
+        "iteration": 110,
+        "usd": 1.3247
+      },
+      {
+        "iteration": 111,
+        "usd": 1.3247
+      },
+      {
+        "iteration": 112,
+        "usd": 1.355
+      },
+      {
+        "iteration": 113,
+        "usd": 1.3583
+      }
+    ],
+    "branch": "autonomy/self-improve-2026-11-07T15-50",
+    "runs": 107
+  },
+  "commits": [
+    {
+      "sha": "775a1b7",
+      "subject": "autonomy(it-113): CHANTIER: Modèle de contenu versionné des packs du site cumulé (`site/packs.ts`) + publication par le build statique ave",
+      "at": "2026-11-07T19:01:09+01:00"
+    },
+    {
+      "sha": "a6db9ab",
+      "subject": "autonomy(it-112): {\"type\":\"step_start\",\"timestamp\":1794074161974,\"sessionID\":\"ses_e48d8f6a9ffeoAiJElxXeyP0PY\",\"part\":{\"id\":\"prt_1b72733360",
+      "at": "2026-11-07T18:58:04+01:00"
+    },
+    {
+      "sha": "0ab8eb1",
+      "subject": "autonomy(it-111): WIP tests rouges — prochaine itération répare — {\"type\":\"error\",\"timestamp\":1794074149670,\"sessionID\":\"\",\"error\":{\"type\":\"unknow",
+      "at": "2026-11-07T18:55:50+01:00"
+    },
+    {
+      "sha": "42489d5",
+      "subject": "autonomy(it-110): WIP tests rouges — prochaine itération répare — {\"type\":\"step_start\",\"timestamp\":1794073910419,\"sessionID\":\"ses_e48dca709ffentIW",
+      "at": "2026-11-07T18:55:48+01:00"
+    },
+    {
+      "sha": "53222f7",
+      "subject": "autonomy(it-109): CHANTIER: Couche de déploiement du site — écriture confinée du build statique (`site/deploy.ts`), fermant le premier ite",
+      "at": "2026-11-07T18:51:49+01:00"
+    },
+    {
+      "sha": "371355f",
+      "subject": "autonomy(it-108): CHANTIER: Cœur pur du build statique public du site (`site/build.ts`) — agrégat public + index des packs + page, à parti",
+      "at": "2026-11-07T18:50:18+01:00"
+    }
+  ]
+}

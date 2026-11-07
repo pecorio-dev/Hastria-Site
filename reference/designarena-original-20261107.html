@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hastria — Plateforme du système multi-modèles omega | hastria.fun</title>
+<meta name="description" content="Hastria est la plateforme publique du système multi-modèles omega. Stats en temps réel, code source intégral, plugins sandboxés, builder pro, programme contributeurs et comptes vérifiés sur hastria.fun.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://hastria.fun/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hastria.fun/">
+<meta property="og:title" content="Hastria — Le système multi-modèles omega">
+<meta property="og:description" content="Le système multi-modèles omega, ouvert, mesurable et extensible. Dashboard public, code intégral, plugins restreints, builder pro.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Hastria omega","url":"https://hastria.fun","applicationCategory":"DeveloperApplication","operatingSystem":"Web","description":"Plateforme du système multi-modèles omega","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"2841"}}</script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Space Grotesk','sans-serif'],serif:['Instrument Serif','serif'],mono:['JetBrains Mono','monospace']},colors:{ink:'#07070B',paper:'#F4F1EA',violet2:'#7C6CFF',mint:'#00E8B8',amber2:'#FFB340'}}}}
+</script>
+<style>
+*{-webkit-tap-highlight-color:transparent}
+body{background:#07070B;color:#EDEDE8;font-family:Inter,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(900px 500px at 15% -5%,rgba(124,108,255,.28),transparent 60%),radial-gradient(800px 400px at 90% 0%,rgba(0,232,184,.18),transparent 60%),radial-gradient(600px 600px at 50% 110%,rgba(255,179,64,.12),transparent 60%),#07070B}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,black 30%,transparent 100%);pointer-events:none}
+.noise{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.page{display:none}.page.active{display:block;animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.btn-primary{background:#F4F1EA;color:#07070B;border-radius:999px;padding:13px 24px;font-weight:700;font-size:14px;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:8px;transition:.2s;border:1px solid #F4F1EA}
+.btn-primary:hover{background:#7C6CFF;border-color:#7C6CFF;color:white;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:12px 22px;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:.2s}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-accent{background:linear-gradient(135deg,#7C6CFF,#00E8B8);color:#07070B;border-radius:999px;padding:13px 24px;font-weight:800;font-size:14px}
+.chip{font-family:JetBrains Mono,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:7px 11px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.05)}
+.card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:22px}
+.card:hover{border-color:rgba(255,255,255,.2)}
+.navlink{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.72);padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.navlink:hover,.navlink.active{background:#F4F1EA;color:#07070B}
+input,select,textarea{outline:none}
+.input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;font-size:14px;width:100%;color:white}
+.input:focus{border-color:#7C6CFF;box-shadow:0 0 0 3px rgba(124,108,255,.2)}
+.marquee{display:flex;gap:0;white-space:nowrap;animation:scroll 22s linear infinite}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.progress{height:8px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#7C6CFF,#00E8B8);border-radius:99px}
+.az-btn{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.12);font-family:JetBrains Mono;font-size:13px;font-weight:700}
+.az-btn.active{background:#F4F1EA;color:black;border-color:#F4F1EA}
+.code-line{counter-increment:line}.code-line::before{content:counter(line);display:inline-block;width:28px;color:#5A5A6E;text-align:right;margin-right:16px;user-select:none}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:#2A2A35;border-radius:99px;border:2px solid #07070B}
+.toggle{width:44px;height:24px;background:#2A2A35;border-radius:99px;position:relative;cursor:pointer;flex-shrink:0}
+.toggle:after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:white;border-radius:50%;transition:.2s}
+.toggle.on{background:#7C6CFF}.toggle.on:after{left:23px}
+.verified{width:18px;height:18px;background:#2F7CFF;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:900;flex-shrink:0}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- TOP BAR -->
+<div class="bg-[#F4F1EA] text-black text-[12px] font-semibold">
+  <div class="max-w-7xl mx-auto px-4 h-9 flex items-center justify-between gap-3">
+    <span class="truncate">hastria.fun — Domaine principal, sans sous-domaine • Nouvelle plateforme intégralement refondue</span>
+    <span class="hidden md:flex items-center gap-2"><span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span> API omega • <span id="topLatency">184 ms</span> • 99,98% uptime</span>
+    <button onclick="showPage('dashboard')" class="underline underline-offset-2 cursor-pointer">Stats publiques →</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="sticky top-0 z-40 backdrop-blur-xl bg-black/70 border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-4 h-[68px] flex items-center justify-between gap-3">
+    <div onclick="showPage('accueil')" class="flex items-center gap-3 cursor-pointer shrink-0">
+      <div class="w-9 h-9 rounded-xl bg-[#F4F1EA] text-black grid place-items-center font-display font-bold text-[19px]">H</div>
+      <div class="leading-none"><div class="font-display font-bold tracking-[-0.03em] text-[20px]">HASTRIA</div><div class="text-[10px] tracking-[.22em] text-white/50 font-mono mt-0.5">OMEGA SYSTEM</div></div>
+      <span class="hidden lg:inline chip !py-1 !px-2 text-[10px]">v4.2 PUBLIC</span>
+    </div>
+    <nav class="hidden xl:flex items-center bg-white/5 border border-white/10 rounded-full p-1" id="mainNav">
+      <span class="navlink active" data-nav="accueil" onclick="showPage('accueil')">Accueil</span>
+      <span class="navlink" data-nav="projet" onclick="showPage('projet')">Projet A-Z</span>
+      <span class="navlink" data-nav="dashboard" onclick="showPage('dashboard')">Dashboard</span>
+      <span class="navlink" data-nav="code" onclick="showPage('code')">Code source</span>
+      <span class="navlink" data-nav="plugins" onclick="showPage('plugins')">Plugins</span>
+      <span class="navlink" data-nav="store" onclick="showPage('store')">Store <span class="text-[9px] bg-amber-400 text-black px-1.5 py-0.5 rounded-full font-bold ml-1">BIENTÔT</span></span>
+      <span class="navlink" data-nav="builder" onclick="showPage('builder')">Builder Pro</span>
+      <span class="navlink" data-nav="contributeurs" onclick="showPage('contributeurs')">Contributeurs</span>
+    </nav>
+    <div class="flex items-center gap-2 shrink-0">
+      <button onclick="openAuth('Connexion requise pour publier, contribuer ou installer un plugin.')" class="hidden sm:block text-[13px] font-semibold px-3 py-2" id="authBtn">Se connecter</button>
+      <button onclick="showPage('builder')" class="btn-primary !py-2.5 !px-4 text-[13px]">Créer un site <span>→</span></button>
+      <button onclick="toggleMobile()" class="xl:hidden w-10 h-10 grid place-items-center border border-white/15 rounded-full text-xl">☰</button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="hidden xl:hidden border-t border-white/10 bg-black px-4 py-4 grid grid-cols-2 gap-2 text-sm font-semibold">
+    <button onclick="showPage('accueil')" class="text-left p-3 bg-white/5 rounded-xl">Accueil</button><button onclick="showPage('projet')" class="text-left p-3 bg-white/5 rounded-xl">Projet A-Z</button><button onclick="showPage('dashboard')" class="text-left p-3 bg-white/5 rounded-xl">Dashboard public</button><button onclick="showPage('code')" class="text-left p-3 bg-white/5 rounded-xl">Code source</button><button onclick="showPage('plugins')" class="text-left p-3 bg-white/5 rounded-xl">Plugins</button><button onclick="showPage('store')" class="text-left p-3 bg-white/5 rounded-xl">Store — Bientôt</button><button onclick="showPage('builder')" class="text-left p-3 bg-white/5 rounded-xl">Builder Pro</button><button onclick="showPage('contributeurs')" class="text-left p-3 bg-white/5 rounded-xl">Contributeurs</button>
+  </div>
+</header>
+
+<main>
+<!-- ================= ACCUEIL ================= -->
+<section id="page-accueil" class="page active">
+  <!-- HERO EDITORIAL -->
+  <div class="max-w-7xl mx-auto px-4 pt-10 md:pt-16 pb-8">
+    <div class="flex flex-wrap items-center justify-between gap-3 border-y border-white/10 py-3 text-[11px] font-mono tracking-[.16em] text-white/60">
+      <span>ÉDITION PUBLIQUE — N°042 — PARIS / OPEN SOURCE</span><span class="hidden md:inline">SYSTÈME MULTI-MODÈLES • ROUTAGE INTELLIGENT • SANDBOX</span><span id="liveClock">--:--:--</span>
+    </div>
+    <div class="grid lg:grid-cols-12 gap-8 mt-8">
+      <div class="lg:col-span-8">
+        <div class="flex gap-2 flex-wrap"><span class="chip text-emerald-300 border-emerald-400/30">● SYSTÈME EN LIGNE</span><span class="chip">OMEGA CORE v4.2</span><span class="chip">SANS LOGIN POUR EXPLORER</span></div>
+        <h1 class="font-display font-bold leading-[.92] tracking-[-0.04em] text-[56px] sm:text-[82px] lg:text-[96px] mt-6">Hastria,<br>le système<br><span class="font-serif italic font-normal tracking-normal text-[#C9C2FF]">multi-modèles</span> omega.</h1>
+        <p class="text-[17px] md:text-[19px] leading-relaxed text-white/70 max-w-[620px] mt-6">Un seul domaine, <strong class="text-white">hastria.fun</strong>, pour orchestrer 14 modèles, router chaque requête vers le meilleur moteur, et ouvrir le code, les stats et les extensions à tous — sans compte, sans friction.</p>
+        <div class="flex flex-wrap gap-3 mt-8">
+          <button onclick="showPage('dashboard')" class="btn-primary">Voir le dashboard public <span>↗</span></button>
+          <button onclick="showPage('code')" class="btn-outline">&lt;/&gt; Lire le code intégral</button>
+          <button onclick="showPage('builder')" class="btn-accent">Essayer le Builder Pro</button>
+        </div>
+        <div class="flex items-center gap-3 mt-7">
+          <div class="flex -space-x-2" id="heroAvatars"></div>
+          <p class="text-[13px] text-white/60"><strong class="text-white" id="heroContribCount">1 284 contributeurs</strong> • Comptes vérifiés • Revue créateur ou vote communautaire</p>
+        </div>
+      </div>
+      <div class="lg:col-span-4">
+        <div class="rounded-[24px] overflow-hidden border border-white/12 bg-white/5">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80" alt="Hastria omega" class="w-full h-[210px] object-cover">
+          <div class="p-5">
+            <div class="flex justify-between items-start"><div><p class="font-mono text-[11px] tracking-widest text-white/50">REQUÊTE EN DIRECT — API /v1/route</p><p class="font-semibold mt-1">Routage omega en cours</p></div><span class="bg-emerald-400 text-black text-[11px] font-bold px-2 py-1 rounded-full">LIVE</span></div>
+            <div class="bg-black/60 rounded-xl p-3.5 font-mono text-[12px] leading-relaxed mt-4 text-emerald-300" id="liveTerminal">POST /omega/route<br><span class="text-white/60">→ sélection du modèle...</span></div>
+            <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+              <div class="bg-white/5 rounded-xl py-3"><p class="font-display font-bold text-lg" id="statModelsHero">14</p><p class="text-[10px] tracking-widest text-white/50 font-mono">MODÈLES</p></div>
+              <div class="bg-white/5 rounded-xl py-3"><p class="font-display font-bold text-lg text-[#00E8B8]" id="statReqHero">2,84M</p><p class="text-[10px] tracking-widest text-white/50 font-mono">REQ / JOUR</p></div>
+              <div class="bg-white/5 rounded-xl py-3"><p class="font-display font-bold text-lg" id="statLatHero">184ms</p><p class="text-[10px] tracking-widest text-white/50 font-mono">LATENCE P50</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-3">
+          <div class="card flex-1 p-4"><p class="text-[11px] font-mono tracking-widest text-white/50">PERFORMANCE</p><p class="font-display font-bold text-[22px] mt-1">98 / 100 <span class="text-emerald-400 text-sm">Lighthouse</span></p><p class="text-xs text-white/50">HTML sémantique, indexable, Core Web Vitals optimisés</p></div>
+          <div class="card flex-1 p-4"><p class="text-[11px] font-mono tracking-widest text-white/50">STORE MODULES</p><p class="font-display font-bold text-[16px] mt-1 text-amber-300">EN CONSTRUCTION</p><p class="text-xs text-white/50">Non disponible au lancement — aucun achat possible</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="border-y border-white/10 py-3 overflow-hidden bg-white/[0.03]"><div class="marquee font-display font-bold text-[15px] tracking-wide" id="marquee"></div></div>
+
+  <!-- CHIFFRES API -->
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-wrap justify-between items-end gap-4 mb-6"><div><p class="chip inline-block">API SERVEUR — TEMPS RÉEL — SANS LOGIN</p><h2 class="font-display font-bold text-[34px] md:text-[44px] leading-none tracking-tight mt-3">Tout est public.<br><span class="font-serif italic font-normal text-white/70">Tout est mesurable.</span></h2></div><button onclick="refreshAPI(true)" class="btn-outline !py-2.5 text-[13px]">↻ Actualiser via l'API</button></div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" id="apiCards"></div>
+    <p class="text-[12px] text-white/40 font-mono mt-3" id="apiStatus">GET https://hastria.fun/api/v1/stats — 200 OK — Dernière synchro à l'instant</p>
+  </div>
+
+  <!-- POURQUOI -->
+  <div class="max-w-7xl mx-auto px-4 pb-14 grid lg:grid-cols-3 gap-4">
+    <article class="card p-6 lg:col-span-2 relative overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1000&q=80" class="absolute inset-0 w-full h-full object-cover opacity-20" alt="">
+      <div class="relative"><span class="chip">LE RÉCIT — DE A À Z</span><h3 class="font-display font-bold text-[30px] leading-tight mt-4 max-w-[480px]">D'une idée de routage à une plateforme ouverte utilisée par des milliers de builders.</h3><p class="text-white/65 leading-relaxed mt-3 max-w-[540px]">Architecture, échecs, pivots, sécurité sandbox, gouvernance des contributeurs : nous documentons chaque lettre du parcours, sans rien masquer.</p><button onclick="showPage('projet')" class="btn-primary mt-6">Lire le projet de A à Z →</button></div>
+    </article>
+    <div class="grid gap-4">
+      <article class="card p-6 cursor-pointer" onclick="showPage('plugins')"><div class="flex justify-between"><span class="w-10 h-10 rounded-xl bg-violet-500/20 grid place-items-center text-violet-300 font-mono font-bold">{ }</span><span class="text-[11px] font-mono bg-white/10 px-2 py-1 rounded-full h-fit">47 PLUGINS</span></div><h3 class="font-bold text-[18px] mt-4">Plugins restreints par conception</h3><p class="text-sm text-white/60 leading-relaxed mt-1">Sandbox isolée, scopes explicites, aucun accès hors périmètre. L'installation requiert un compte.</p><p class="text-sm font-bold mt-4">Explorer le catalogue →</p></article>
+      <article class="card p-6 cursor-pointer" onclick="showPage('store')"><div class="flex justify-between"><span class="w-10 h-10 rounded-xl bg-amber-400/20 grid place-items-center text-amber-300 font-bold">M</span><span class="text-[11px] font-bold bg-amber-400 text-black px-2 py-1 rounded-full h-fit">EN CONSTRUCTION</span></div><h3 class="font-bold text-[18px] mt-4">Store de modules</h3><p class="text-sm text-white/60 leading-relaxed mt-1">Le store n'est pas disponible au lancement. Aucun achat, aucune installation. Rejoignez la liste d'attente.</p><p class="text-sm font-bold mt-4">Voir l'avancement — 68% →</p></article>
+    </div>
+  </div>
+
+  <!-- BUILDER TEASER + VERIFIED -->
+  <div class="max-w-7xl mx-auto px-4 pb-16 grid lg:grid-cols-2 gap-4">
+    <div class="rounded-[24px] bg-[#F4F1EA] text-black p-6 md:p-8">
+      <p class="font-mono text-[11px] tracking-[.18em] font-bold">BUILDER DE SITES PRO — PREVIEW PUBLIQUE</p>
+      <h3 class="font-display font-bold text-[32px] leading-[1.02] tracking-tight mt-3">Créez un site pro,<br><span class="font-serif italic font-normal">prévisualisez en direct,</span><br>publiez en un clic.</h3>
+      <div class="flex gap-2 mt-5 flex-wrap"><span class="bg-black text-white text-xs font-bold px-3 py-1.5 rounded-full">4 templates</span><span class="bg-black/10 text-xs font-bold px-3 py-1.5 rounded-full">SEO intégré</span><span class="bg-black/10 text-xs font-bold px-3 py-1.5 rounded-full">Export HTML</span><span class="bg-black/10 text-xs font-bold px-3 py-1.5 rounded-full">Aperçu partageable sans login</span></div>
+      <button onclick="showPage('builder')" class="mt-7 bg-black text-white rounded-full px-6 py-3.5 font-bold text-sm">Ouvrir le Builder →</button>
+      <p class="text-xs text-black/50 mt-3">La publication nécessite un compte. La preview reste 100% publique et indexable.</p>
+    </div>
+    <div class="card p-6 md:p-8">
+      <div class="flex justify-between items-start"><div><p class="chip">COMPTES VÉRIFIÉS</p><h3 class="font-display font-bold text-[26px] leading-tight mt-3">La confiance,<br>vérifiable par tous.</h3></div><span class="verified !w-9 !h-9 !text-base">✓</span></div>
+      <div id="verifiedList" class="mt-5 space-y-2.5"></div>
+      <button onclick="showPage('contributeurs')" class="btn-outline w-full justify-center mt-5">Programme contributeurs — Revue créateur ou vote →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJET A-Z ================= -->
+<section id="page-projet" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <p class="chip">LE PROJET — DE A À Z — PAGE PUBLIQUE INDEXABLE</p>
+    <h2 class="font-display font-bold text-[44px] md:text-[64px] leading-[.95] tracking-tight mt-5">Le récit complet,<br><span class="font-serif italic font-normal text-[#C9C2FF]">lettre par lettre.</span></h2>
+    <p class="text-white/65 text-[17px] leading-relaxed max-w-[680px] mt-5">Hastria est née d'un constat simple : aucun modèle seul ne répond bien à tout. omega route, évalue et combine. Voici l'histoire intégrale — architecture, gouvernance, sécurité et feuille de route — de A à Z.</p>
+    <div class="flex flex-wrap gap-1.5 mt-8" id="azNav"></div>
+    <div class="grid lg:grid-cols-12 gap-4 mt-4">
+      <article class="card p-6 md:p-8 lg:col-span-8 min-h-[280px]">
+        <div class="flex items-center gap-4"><span id="azLetter" class="w-14 h-14 rounded-2xl bg-[#F4F1EA] text-black grid place-items-center font-display font-bold text-[26px]">A</span><div><p class="font-mono text-[11px] tracking-widest text-white/50" id="azPhase">PHASE 01 — ORIGINES</p><h3 id="azTitle" class="font-display font-bold text-[26px] leading-none mt-1">Architecture</h3></div><span class="ml-auto chip hidden sm:inline" id="azStatus">TERMINÉ</span></div>
+        <p id="azText" class="text-white/70 leading-[1.8] mt-5 text-[15.5px]"></p>
+        <div class="grid sm:grid-cols-3 gap-3 mt-6" id="azFacts"></div>
+      </article>
+      <aside class="lg:col-span-4 space-y-4">
+        <div class="card p-6"><p class="font-mono text-[11px] tracking-widest text-white/50">FEUILLE DE ROUTE PUBLIQUE</p><div class="mt-4 space-y-4" id="roadmap"></div></div>
+        <div class="rounded-[22px] bg-[#F4F1EA] text-black p-6"><p class="font-display font-bold text-[20px] leading-tight">Performance et indexation, par conception.</p><ul class="text-sm text-black/70 space-y-2 mt-3 leading-relaxed"><li>✓ HTML sémantique, métadonnées Open Graph et JSON-LD</li><li>✓ Pages publiques crawlables sans authentification</li><li>✓ Images optimisées, chargement différé, 98/100 Lighthouse</li><li>✓ Domaine unique hastria.fun, aucun sous-domaine</li></ul></div>
+      </aside>
+    </div>
+    <div class="grid md:grid-cols-3 gap-4 mt-4">
+      <article class="card p-6"><p class="font-mono text-[11px] text-white/50 tracking-widest">PRINCIPE 01</p><h3 class="font-bold text-lg mt-2">Ouvert par défaut</h3><p class="text-sm text-white/60 leading-relaxed mt-1">Stats, code, catalogue et previews sont publics. Le login ne sert qu'aux actions : publier, contribuer, approuver, installer.</p></article>
+      <article class="card p-6"><p class="font-mono text-[11px] text-white/50 tracking-widest">PRINCIPE 02</p><h3 class="font-bold text-lg mt-2">Restreint par conception</h3><p class="text-sm text-white/60 leading-relaxed mt-1">Chaque plugin déclare ses scopes et s'exécute en sandbox isolée. Aucun privilège implicite, tout est auditable.</p></article>
+      <article class="card p-6"><p class="font-mono text-[11px] text-white/50 tracking-widest">PRINCIPE 03</p><h3 class="font-bold text-lg mt-2">Mesurable en continu</h3><p class="text-sm text-white/60 leading-relaxed mt-1">L'API du serveur alimente ce site en temps réel : latence, requêtes, coûts et qualité sont visibles par tous.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DASHBOARD ================= -->
+<section id="page-dashboard" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-wrap justify-between gap-4 items-end">
+      <div><p class="chip text-emerald-300 border-emerald-400/30">● TABLEAU DE BORD PUBLIC — AUCUN LOGIN REQUIS</p><h2 class="font-display font-bold text-[40px] md:text-[56px] leading-none tracking-tight mt-4">omega, en <span class="font-serif italic font-normal text-[#C9C2FF]">temps réel.</span></h2><p class="text-white/60 mt-3 max-w-[560px]">Données servies par l'API du serveur Hastria. Actualisation automatique toutes les 5 secondes.</p></div>
+      <div class="flex gap-2"><select id="dashRange" onchange="updateCharts()" class="input !w-auto !py-2.5 text-sm"><option value="24h">Dernières 24h</option><option value="7j">7 jours</option><option value="30j">30 jours</option></select><button onclick="refreshAPI(true)" class="btn-primary !py-2.5">↻ Actualiser</button></div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8" id="dashCards"></div>
+    <div class="grid lg:grid-cols-3 gap-4 mt-4">
+      <div class="card p-5 lg:col-span-2"><div class="flex justify-between"><h3 class="font-bold">Requêtes routées</h3><span class="font-mono text-xs text-emerald-400" id="chartTotal">+12,4% vs hier</span></div><div class="h-[260px] mt-3"><canvas id="chartReq"></canvas></div></div>
+      <div class="card p-5"><h3 class="font-bold">Répartition par modèle</h3><div class="h-[260px] mt-3 grid place-items-center"><canvas id="chartModels"></canvas></div></div>
+    </div>
+    <div class="card mt-4 overflow-hidden">
+      <div class="p-5 flex flex-wrap justify-between gap-3"><h3 class="font-bold text-[17px]">Modèles omega — état en direct</h3><input oninput="filterModels(this.value)" placeholder="Rechercher un modèle..." class="input !w-[240px] !py-2 text-sm"></div>
+      <div class="overflow-x-auto"><table class="w-full text-sm min-w-[720px]"><thead><tr class="text-left text-[11px] font-mono tracking-widest text-white/45 border-y border-white/10"><th class="p-4">MODÈLE</th><th>STATUT</th><th>REQUÊTES / J</th><th>LATENCE P50</th><th>QUALITÉ</th><th>COÛT / 1K TOK</th><th>TENDANCE</th></tr></thead><tbody id="modelsTable"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CODE ================= -->
+<section id="page-code" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="flex flex-wrap justify-between gap-4 items-end"><div><p class="chip">CODE SOURCE INTÉGRAL — PUBLIC — LICENCE MIT</p><h2 class="font-display font-bold text-[40px] md:text-[56px] leading-none tracking-tight mt-4">Tout le code.<br><span class="font-serif italic font-normal text-[#C9C2FF]">Rien de masqué.</span></h2></div><div class="flex gap-2"><button onclick="copyCode()" class="btn-outline !py-2.5 text-sm">Copier le fichier</button><button onclick="downloadCode()" class="btn-primary !py-2.5 text-sm">Télécharger .zip — 4,2 Mo</button></div></div>
+    <div class="flex flex-wrap gap-2 mt-6 text-[12px] font-mono"><span class="bg-white/8 border border-white/10 rounded-full px-3 py-1.5">TypeScript 68%</span><span class="bg-white/8 border border-white/10 rounded-full px-3 py-1.5">Python 21%</span><span class="bg-white/8 border border-white/10 rounded-full px-3 py-1.5">Rust 11%</span><span class="bg-emerald-400/15 text-emerald-300 border border-emerald-400/25 rounded-full px-3 py-1.5">1 248 tests — 100% verts</span><span class="bg-white/8 border border-white/10 rounded-full px-3 py-1.5">Dernier commit : il y a 12 min</span></div>
+    <div class="card mt-5 overflow-hidden grid lg:grid-cols-[280px_1fr]">
+      <aside class="border-r border-white/10 p-4 bg-black/30">
+        <input oninput="filterFiles(this.value)" placeholder="Rechercher un fichier..." class="input !py-2.5 text-sm mb-3">
+        <p class="font-mono text-[10px] tracking-widest text-white/40 px-1">HASTRIA / OMEGA — ARBORESCENCE</p>
+        <div id="fileTree" class="mt-2 space-y-0.5 text-[13.5px]"></div>
+        <div class="mt-5 p-3.5 bg-violet-500/10 border border-violet-400/20 rounded-xl text-xs leading-relaxed text-white/70">Contribuer requiert un compte. La lecture et le téléchargement sont libres, sans login.</div>
+      </aside>
+      <div class="min-w-0">
+        <div class="flex items-center gap-2 px-4 h-12 border-b border-white/10 bg-white/[0.03] overflow-x-auto" id="codeTabs"></div>
+        <div class="flex items-center justify-between px-4 py-2.5 border-b border-white/10 text-xs font-mono text-white/50"><span id="codePath">omega/core/router.ts</span><span id="codeMeta">142 lignes • TypeScript</span></div>
+        <pre class="p-5 overflow-auto text-[13px] leading-[1.75] font-mono max-h-[560px]" style="counter-reset:line"><code id="codeView"></code></pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLUGINS ================= -->
+<section id="page-plugins" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <p class="chip">CATALOGUE PUBLIC — SANDBOX — SCOPES EXPLICITES</p>
+    <h2 class="font-display font-bold text-[40px] md:text-[56px] leading-none tracking-tight mt-4">Plugins et intégrations,<br><span class="font-serif italic font-normal text-[#C9C2FF]">restreints par conception.</span></h2>
+    <p class="text-white/60 max-w-[640px] mt-4 leading-relaxed">Chaque plugin s'exécute dans une sandbox isolée, déclare ses scopes avant installation et ne peut accéder à rien d'autre. Le catalogue est public ; l'installation requiert un compte vérifié.</p>
+    <div class="card p-4 mt-6 flex flex-col md:flex-row gap-3">
+      <input id="pluginSearch" oninput="renderPlugins()" placeholder="Rechercher un plugin, un scope, un éditeur..." class="input flex-1">
+      <select id="pluginCat" onchange="renderPlugins()" class="input md:!w-[200px]"><option value="">Toutes catégories</option><option>Productivité</option><option>Données</option><option>Communication</option><option>Développement</option><option>Design</option></select>
+      <select id="pluginSort" onchange="renderPlugins()" class="input md:!w-[180px]"><option value="pop">Plus installés</option><option value="note">Mieux notés</option><option value="recent">Plus récents</option></select>
+    </div>
+    <div class="flex gap-2 mt-4 flex-wrap" id="scopeFilters"></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5" id="pluginsGrid"></div>
+  </div>
+</section>
+
+<!-- ================= STORE ================= -->
+<section id="page-store" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="rounded-[26px] border border-amber-400/30 bg-gradient-to-br from-amber-400/15 via-white/5 to-transparent p-6 md:p-10 relative overflow-hidden">
+      <span class="bg-amber-400 text-black text-[11px] font-bold px-3 py-1.5 rounded-full tracking-wide">STORE DE MODULES — EN CONSTRUCTION</span>
+      <h2 class="font-display font-bold text-[38px] md:text-[54px] leading-[1] tracking-tight mt-5 max-w-[640px]">Le store arrive.<br><span class="font-serif italic font-normal text-amber-200">Il n'est pas disponible au lancement.</span></h2>
+      <p class="text-white/65 max-w-[560px] leading-relaxed mt-4">Aucun achat, aucune installation n'est possible aujourd'hui — par choix, pour garantir la sécurité et la qualité de chaque module. Les aperçus ci-dessous sont publics.</p>
+      <div class="max-w-[520px] mt-6"><div class="flex justify-between text-xs font-mono text-white/60 mb-2"><span>AVANCEMENT DU STORE</span><span class="text-amber-300 font-bold">68%</span></div><div class="progress"><i style="width:68%"></i></div><div class="grid grid-cols-3 gap-2 mt-3 text-center text-[11px] font-mono"><span class="bg-white/5 rounded-lg py-2 text-emerald-300">✓ CATALOGUE</span><span class="bg-white/5 rounded-lg py-2 text-emerald-300">✓ SANDBOX</span><span class="bg-white/5 rounded-lg py-2 text-amber-300">… PAIEMENT</span></div></div>
+      <form onsubmit="notifyStore(event)" class="flex flex-col sm:flex-row gap-2 max-w-[520px] mt-6"><input id="storeEmail" type="email" required placeholder="votre@email.fr — être prévenu au lancement" class="input flex-1 !bg-black/40"><button class="btn-primary justify-center">Me prévenir</button></form>
+      <p class="text-xs text-white/40 mt-2" id="storeMsg">12 847 personnes déjà inscrites à la liste d'attente.</p>
+    </div>
+    <h3 class="font-display font-bold text-[26px] mt-10">Modules en préparation — aperçu public</h3>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-5" id="storeGrid"></div>
+  </div>
+</section>
+
+<!-- ================= BUILDER ================= -->
+<section id="page-builder" class="page">
+  <div class="max-w-[1440px] mx-auto px-4 py-10">
+    <div class="flex flex-wrap justify-between gap-3 items-end px-1"><div><p class="chip">BUILDER DE SITES PRO — PREVIEW PUBLIQUE ET PARTAGEABLE</p><h2 class="font-display font-bold text-[36px] md:text-[48px] leading-none tracking-tight mt-3">Builder <span class="font-serif italic font-normal text-[#C9C2FF]">Hastria Pro</span></h2></div><div class="flex gap-2"><button onclick="exportBuilder()" class="btn-outline !py-2.5 text-sm">Exporter le HTML</button><button onclick="requireAuth('Publier un site')" class="btn-primary !py-2.5 text-sm">Publier le site</button></div></div>
+    <div class="grid lg:grid-cols-[340px_1fr] gap-4 mt-6 items-start">
+      <aside class="card p-5 space-y-5 lg:sticky lg:top-[130px]">
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">NOM DU SITE</label><input id="bName" value="Atelier Lumen" oninput="renderBuilder()" class="input mt-2"></div>
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">TEMPLATE PRO</label><div class="grid grid-cols-2 gap-2 mt-2" id="bTemplates"></div></div>
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">PALETTE</label><div class="flex gap-2 mt-2" id="bPalettes"></div></div>
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">TITRE PRINCIPAL</label><input id="bHeadline" value="Nous créons des marques qui durent." oninput="renderBuilder()" class="input mt-2"></div>
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">SECTIONS</label><div class="space-y-2.5 mt-2" id="bSections"></div></div>
+        <div><label class="text-xs font-bold tracking-widest font-mono text-white/50">APPAREIL</label><div class="grid grid-cols-3 gap-1 p-1 bg-white/5 rounded-xl mt-2" id="bDevice"><button data-dev="desktop" class="py-2 rounded-lg text-xs font-bold bg-white text-black">Desktop</button><button data-dev="tablet" class="py-2 rounded-lg text-xs font-bold text-white/60">Tablette</button><button data-dev="mobile" class="py-2 rounded-lg text-xs font-bold text-white/60">Mobile</button></div></div>
+        <div class="bg-white/5 rounded-xl p-3.5 text-xs leading-relaxed text-white/60">Lien de preview public :<br><span class="font-mono text-emerald-300 break-all" id="bShareLink">hastria.fun/p/atelier-lumen</span><br><button onclick="copyShare()" class="underline font-bold text-white mt-1">Copier le lien partageable</button></div>
+      </aside>
+      <div class="card overflow-hidden">
+        <div class="flex items-center gap-2 px-4 h-11 bg-white/[0.04] border-b border-white/10"><span class="w-3 h-3 rounded-full bg-[#FF5F57]"></span><span class="w-3 h-3 rounded-full bg-[#FEBC2E]"></span><span class="w-3 h-3 rounded-full bg-[#28C840]"></span><span class="ml-3 bg-black/40 rounded-lg px-3 py-1 font-mono text-[11px] text-white/60 flex-1 truncate" id="bUrlBar">hastria.fun/p/atelier-lumen</span><span class="text-[11px] font-bold bg-emerald-400 text-black px-2 py-1 rounded-full">PREVIEW LIVE</span></div>
+        <div class="bg-[#111116] p-3 sm:p-6 grid place-items-center min-h-[620px]"><div id="bPreview" class="w-full transition-all duration-300 origin-top"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTRIBUTEURS ================= -->
+<section id="page-contributeurs" class="page">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <p class="chip">PROGRAMME CONTRIBUTEURS — PUBLIC — COMPTES VÉRIFIÉS</p>
+    <h2 class="font-display font-bold text-[40px] md:text-[56px] leading-[.98] tracking-tight mt-4">Contribuer à omega,<br><span class="font-serif italic font-normal text-[#C9C2FF]">être reconnu pour de vrai.</span></h2>
+    <div class="grid md:grid-cols-2 gap-4 mt-8">
+      <article class="rounded-[22px] bg-[#F4F1EA] text-black p-6 md:p-7"><p class="font-mono text-[11px] tracking-widest font-bold">VOIE 01 — REVUE DU CRÉATEUR</p><h3 class="font-display font-bold text-[24px] mt-2">Approbation directe</h3><p class="text-sm text-black/65 leading-relaxed mt-2">Votre contribution est relue par le créateur d'Hastria sous 72h. Idéal pour le code cœur, la sécurité et l'architecture omega.</p><button onclick="requireAuth('Demander une revue du créateur')" class="mt-5 bg-black text-white rounded-full px-5 py-3 font-bold text-sm">Demander une revue →</button></article>
+      <article class="card p-6 md:p-7"><p class="font-mono text-[11px] tracking-widest text-white/50">VOIE 02 — VOTE COMMUNAUTAIRE</p><h3 class="font-display font-bold text-[24px] mt-2">Approbation par les pairs</h3><p class="text-sm text-white/60 leading-relaxed mt-2">La communauté vote pendant 7 jours. À 75% de votes favorables et 50 votants minimum, la contribution est approuvée et l'auteur devient vérifié.</p><button onclick="document.getElementById('voteZone').scrollIntoView({behavior:'smooth'})" class="btn-outline mt-5">Voir les votes en cours ↓</button></article>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-4 mt-4">
+      <div class="lg:col-span-7 space-y-4">
+        <div class="card p-6" id="voteZone"><h3 class="font-bold text-[18px]">Votes communautaires en cours</h3><div id="votesList" class="mt-4 space-y-3"></div></div>
+        <div class="card p-6"><h3 class="font-bold text-[18px]">Proposer une contribution</h3><p class="text-sm text-white/55 mt-1">La soumission requiert un compte. L'exploration reste publique.</p>
+          <form onsubmit="submitContrib(event)" class="grid sm:grid-cols-2 gap-3 mt-4"><input id="cTitle" required placeholder="Titre de la contribution" class="input"><select id="cType" class="input"><option>Plugin</option><option>Code cœur omega</option><option>Documentation</option><option>Template Builder</option><option>Traduction</option></select><textarea id="cDesc" required placeholder="Décrivez votre contribution, son impact et ses scopes..." class="input sm:col-span-2 h-24 resize-none"></textarea><label class="flex items-center gap-2 text-sm text-white/60 cursor-pointer"><input type="radio" name="cvoie" checked class="accent-violet-500"> Revue du créateur</label><label class="flex items-center gap-2 text-sm text-white/60 cursor-pointer"><input type="radio" name="cvoie" class="accent-violet-500"> Vote communautaire</label><button class="btn-primary justify-center sm:col-span-2">Soumettre la contribution</button></form>
+        </div>
+      </div>
+      <div class="lg:col-span-5 space-y-4">
+        <div class="card p-6"><div class="flex justify-between items-center"><h3 class="font-bold text-[18px]">Top contributeurs vérifiés</h3><span class="chip !py-1">CE MOIS</span></div><div id="leaderboard" class="mt-4 space-y-2"></div></div>
+        <div class="card p-6"><p class="font-mono text-[11px] tracking-widest text-white/50">DEVENIR COMPTE VÉRIFIÉ</p><ol class="text-sm text-white/65 space-y-2.5 mt-3 leading-relaxed"><li><strong class="text-white">1.</strong> Créez un compte et confirmez votre identité.</li><li><strong class="text-white">2.</strong> Publiez une première contribution approuvée.</li><li><strong class="text-white">3.</strong> Maintenez 90%+ d'approbations sur 30 jours.</li><li><strong class="text-white">4.</strong> Recevez le badge vérifié, visible publiquement.</li></ol><button onclick="openAuth('Créez un compte pour démarrer votre vérification.')" class="btn-primary w-full justify-center mt-5">Commencer ma vérification</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 mt-4">
+  <div class="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-12 gap-8">
+    <div class="md:col-span-5"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-[#F4F1EA] text-black grid place-items-center font-display font-bold text-[19px]">H</div><span class="font-display font-bold text-xl">HASTRIA</span></div><p class="text-sm text-white/55 leading-relaxed mt-4 max-w-[380px]">La plateforme publique du système multi-modèles omega, sur le domaine principal hastria.fun — sans sous-domaine. Cette version remplace intégralement l'ancienne présence du domaine : nouvelle identité, nouveau produit, nouvel univers.</p><p class="font-mono text-[11px] text-white/35 mt-4">SEO : index, follow • Sitemap : /sitemap.xml • Canonical : https://hastria.fun/</p></div>
+    <div class="md:col-span-2"><p class="font-mono text-[11px] tracking-widest text-white/40">PRODUIT</p><ul class="text-sm text-white/65 space-y-2.5 mt-4"><li><button onclick="showPage('projet')">Projet A-Z</button></li><li><button onclick="showPage('dashboard')">Dashboard public</button></li><li><button onclick="showPage('builder')">Builder Pro</button></li><li><button onclick="showPage('store')">Store — Bientôt</button></li></ul></div>
+    <div class="md:col-span-2"><p class="font-mono text-[11px] tracking-widest text-white/40">DÉVELOPPEURS</p><ul class="text-sm text-white/65 space-y-2.5 mt-4"><li><button onclick="showPage('code')">Code source intégral</button></li><li><button onclick="showPage('plugins')">Plugins sandboxés</button></li><li><button onclick="showPage('dashboard')">API — api/v1/stats</button></li><li><button onclick="showPage('contributeurs')">Contribuer</button></li></ul></div>
+    <div class="md:col-span-3"><p class="font-mono text-[11px] tracking-widest text-white/40">RESTER INFORMÉ</p><form onsubmit="notifyStore(event)" class="flex gap-2 mt-4"><input type="email" required placeholder="votre@email.fr" class="input !py-2.5 text-sm"><button class="btn-primary !py-2.5 !px-4 text-sm shrink-0">OK</button></form><p class="text-xs text-white/40 mt-3 leading-relaxed">Lancement du store, nouveaux modèles omega et appels à contributions. Un e-mail par mois, jamais davantage.</p><div class="flex gap-2 mt-4"><span class="chip !normal-case !tracking-normal font-sans">GitHub</span><span class="chip !normal-case !tracking-normal font-sans">Discord</span><span class="chip !normal-case !tracking-normal font-sans">X / Twitter</span></div></div>
+  </div>
+  <div class="border-t border-white/10"><div class="max-w-7xl mx-auto px-4 h-14 flex flex-wrap items-center justify-between gap-2 text-xs text-white/40"><span>© 2026 Hastria — Système multi-modèles omega — Licence MIT pour le code ouvert</span><span>Confidentialité • Conditions • Sécurité sandbox • Accessibilité</span></div></div>
+</footer>
+
+<!-- PLUGIN MODAL -->
+<div id="pluginModal" class="hidden fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm p-4 grid place-items-center" onclick="if(event.target===this)closePlugin()">
+  <div class="bg-[#121218] border border-white/12 rounded-[24px] max-w-[560px] w-full p-6 md:p-7 max-h-[90vh] overflow-auto">
+    <div class="flex justify-between gap-3"><div class="flex gap-3"><span id="pmIcon" class="w-12 h-12 rounded-2xl bg-violet-500/20 grid place-items-center font-mono font-bold text-violet-300 text-lg"></span><div><h3 id="pmName" class="font-display font-bold text-[22px] leading-none"></h3><p id="pmAuthor" class="text-sm text-white/50 mt-1.5"></p></div></div><button onclick="closePlugin()" class="w-9 h-9 border border-white/15 rounded-full shrink-0">✕</button></div>
+    <p id="pmDesc" class="text-sm text-white/65 leading-relaxed mt-5"></p>
+    <p class="font-mono text-[11px] tracking-widest text-white/45 mt-5">SCOPES DEMANDÉS — SANDBOX</p><div id="pmScopes" class="flex flex-wrap gap-1.5 mt-2"></div>
+    <div class="grid grid-cols-3 gap-2 mt-5 text-center"><div class="bg-white/5 rounded-xl py-3"><p class="font-bold" id="pmInstalls"></p><p class="text-[10px] font-mono text-white/45 tracking-widest mt-0.5">INSTALLATIONS</p></div><div class="bg-white/5 rounded-xl py-3"><p class="font-bold" id="pmRating"></p><p class="text-[10px] font-mono text-white/45 tracking-widest mt-0.5">NOTE MOYENNE</p></div><div class="bg-white/5 rounded-xl py-3"><p class="font-bold" id="pmVersion"></p><p class="text-[10px] font-mono text-white/45 tracking-widest mt-0.5">VERSION</p></div></div>
+    <div class="bg-emerald-400/10 border border-emerald-400/20 rounded-xl p-3.5 text-xs leading-relaxed text-emerald-100/80 mt-5">Exécution en sandbox isolée. Ce plugin ne peut pas accéder à vos fichiers, à votre réseau ou à d'autres plugins hors des scopes listés ci-dessus.</div>
+    <button id="pmInstallBtn" onclick="installPlugin()" class="btn-primary w-full justify-center mt-5">Installer ce plugin</button>
+    <p class="text-center text-xs text-white/40 mt-2.5">L'installation requiert un compte vérifié. Le catalogue reste public sans login.</p>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="authModal" class="hidden fixed inset-0 z-[80] bg-black/80 backdrop-blur-sm p-4 grid place-items-center" onclick="if(event.target===this)closeAuth()">
+  <div class="bg-[#121218] border border-white/12 rounded-[24px] max-w-[420px] w-full p-7">
+    <div class="flex justify-between"><div class="w-11 h-11 rounded-xl bg-[#F4F1EA] text-black grid place-items-center font-display font-bold text-lg">H</div><button onclick="closeAuth()" class="w-9 h-9 border border-white/15 rounded-full">✕</button></div>
+    <h3 class="font-display font-bold text-[24px] mt-5">Bienvenue sur Hastria</h3>
+    <p id="authMsg" class="text-sm text-white/55 leading-relaxed mt-1.5">Connectez-vous pour publier, contribuer, demander une approbation ou installer un plugin.</p>
+    <form onsubmit="doLogin(event)" class="mt-5 space-y-3"><input id="authName" required placeholder="Nom ou pseudo — ex : lea.dev" class="input"><input type="email" required placeholder="email@exemple.fr" class="input"><input type="password" required placeholder="Mot de passe" class="input"><button class="btn-primary w-full justify-center !py-3.5">Se connecter et continuer</button></form>
+    <button onclick="doLogin(event,true)" class="btn-outline w-full justify-center mt-2.5">Continuer avec GitHub</button>
+    <p class="text-[11px] text-white/35 text-center leading-relaxed mt-4">Explorer les stats, le code, le catalogue et les previews ne demande aucun compte.</p>
+  </div>
+</div>
+
+<div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-[90] bg-[#F4F1EA] text-black font-semibold text-sm px-5 py-3.5 rounded-full shadow-2xl max-w-[92vw] text-center"></div>
+
+<script>
+// ---------- ETAT GLOBAL ----------
+let currentUser = JSON.parse(localStorage.getItem('hastria_user')||'null');
+let apiStats = {models:14, req:2847391, tokens:1840000000, latency:184, uptime:99.98, quality:94.2, cost:0.0042, contributors:1284, plugins:47, votes:8923};
+let currentPlugin = null, voted = {}, selectedScope = '';
+
+// ---------- NAVIGATION SPA ----------
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active', n.dataset.nav===id));
+  document.getElementById('mobileMenu').classList.add('hidden');
+  location.hash = id; window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='dashboard') setTimeout(initCharts,60);
+}
+function toggleMobile(){ document.getElementById('mobileMenu').classList.toggle('hidden'); }
+window.addEventListener('hashchange',()=>{ const h=location.hash.replace('#',''); if(h && document.getElementById('page-'+h)) showPage(h); });
+
+// ---------- TOAST / AUTH ----------
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.remove('hidden'); setTimeout(()=>t.classList.add('hidden'),3400); }
+function updateAuthUI(){ const b=document.getElementById('authBtn'); if(currentUser){ b.innerHTML = '<span class="inline-flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-gradient-to-br from-violet-400 to-emerald-300 text-black grid place-items-center text-xs font-bold">'+currentUser.name[0].toUpperCase()+'</span>'+currentUser.name+' <span class="verified" style="width:15px;height:15px;font-size:9px">✓</span></span>'; } }
+function openAuth(msg){ if(msg) document.getElementById('authMsg').textContent=msg; document.getElementById('authModal').classList.remove('hidden'); }
+function closeAuth(){ document.getElementById('authModal').classList.add('hidden'); }
+function requireAuth(action){ if(currentUser){ toast(action+' : action autorisée pour '+currentUser.name+' (compte vérifié).'); } else openAuth('Connexion requise pour : '+action+'. Créez un compte vérifié en 30 secondes.'); }
+function doLogin(e,github){ e.preventDefault(); const name = github ? 'lea.dev' : (document.getElementById('authName').value.trim()||'utilisateur'); currentUser={name:name, verified:true}; localStorage.setItem('hastria_user', JSON.stringify(currentUser)); updateAuthUI(); closeAuth(); toast('Bienvenue '+name+' — compte connecté et vérifié. Vous pouvez publier, contribuer et installer.'); }
+
+// ---------- API SIMULEE (stats reelles via endpoint serveur) ----------
+function fmt(n){ return n.toLocaleString('fr-FR'); }
+function renderApiCards(){
+  const cards=[
+    {label:'REQUÊTES AUJOURD\u2019HUI', val:fmt(apiStats.req), sub:'+12,4% vs hier • API /v1/stats', color:'text-[#00E8B8]'},
+    {label:'TOKENS TRAITÉS (30J)', val:(apiStats.tokens/1e9).toFixed(2)+' Md', sub:'Tous modèles omega confondus', color:''},
+    {label:'LATENCE P50', val:apiStats.latency+' ms', sub:'Routage + inférence • cible < 250 ms', color:''},
+    {label:'DISPONIBILITÉ', val:apiStats.uptime+'%', sub:'Sur 90 jours • status.hastria.fun intégré ici', color:'text-emerald-300'},
+  ];
+  const html = cards.map(c=>'<article class="card p-5"><p class="font-mono text-[10px] tracking-[.16em] text-white/45">'+c.label+'</p><p class="font-display font-bold text-[30px] leading-none mt-2.5 '+c.color+'">'+c.val+'</p><p class="text-xs text-white/50 mt-2">'+c.sub+'</p></article>').join('');
+  document.getElementById('apiCards').innerHTML = html; document.getElementById('dashCards').innerHTML = html;
+  document.getElementById('statReqHero').textContent = (apiStats.req/1e6).toFixed(2).replace('.',',')+'M';
+  document.getElementById('statLatHero').textContent = apiStats.latency+'ms';
+  document.getElementById('topLatency').textContent = apiStats.latency+' ms';
+}
+function refreshAPI(manual){
+  // Simulation d'un appel reseau vers l'API du serveur Hastria
+  apiStats.req += Math.floor(Math.random()*9000+1200);
+  apiStats.latency = Math.max(142, Math.min(238, apiStats.latency + Math.floor(Math.random()*17-8)));
+  apiStats.tokens += Math.floor(Math.random()*400000+80000);
+  renderApiCards(); renderModels();
+  document.getElementById('apiStatus').textContent = 'GET https://hastria.fun/api/v1/stats — 200 OK — Actualisé à '+new Date().toLocaleTimeString('fr-FR');
+  if(manual) toast('Statistiques actualisées via l\u2019API du serveur Hastria.');
+}
+setInterval(()=>{ refreshAPI(false); tickTerminal(); }, 5000);
+
+// ---------- TERMINAL LIVE + HORLOGE ----------
+const termLines = ['→ omega-mini sélectionné • confiance 0,97 • 142 ms','→ omega-code sélectionné • confiance 0,95 • 201 ms','→ omega-vision sélectionné • confiance 0,93 • 268 ms','→ omega-large sélectionné • confiance 0,98 • 311 ms'];
+let termIdx=0;
+function tickTerminal(){ const el=document.getElementById('liveTerminal'); if(!el) return; el.innerHTML='POST /omega/route<br><span class="text-white">'+termLines[termIdx%termLines.length]+'</span><br><span class="text-white/40">200 OK • sandbox vérifiée • scopes accordés</span>'; termIdx++; }
+setInterval(()=>{ document.getElementById('liveClock').textContent = new Date().toLocaleTimeString('fr-FR')+' — PARIS'; },1000);
+
+// ---------- MARQUEE / AVATARS / VERIFIES ----------
+(function(){
+  const items=['14 MODÈLES ORCHESTRÉS','ROUTAGE INTELLIGENT OMEGA','CODE SOURCE 100% PUBLIC','PLUGINS SANDBOXÉS','DASHBOARD SANS LOGIN','BUILDER PRO + PREVIEW','COMPTES VÉRIFIÉS','STORE — EN CONSTRUCTION'];
+  const seq = items.map(i=>'<span class="mx-5 flex items-center gap-5 inline-flex">'+i+' <span class="text-[#7C6CFF]">✦</span></span>').join('');
+  document.getElementById('marquee').innerHTML = '<div class="flex shrink-0">'+seq+'</div><div class="flex shrink-0">'+seq+'</div>';
+  const people=[['LD','from-violet-400 to-fuchsia-400'],['MK','from-emerald-300 to-cyan-400'],['AS','from-amber-300 to-orange-400'],['JR','from-sky-300 to-violet-400'],['NP','from-rose-300 to-amber-300']];
+  document.getElementById('heroAvatars').innerHTML = people.map(p=>'<span class="w-9 h-9 rounded-full bg-gradient-to-br '+p[1]+' border-2 border-[#07070B] grid place-items-center text-[10px] font-bold text-black">'+p[0]+'</span>').join('');
+  const verified=[{n:'lea.dev',r:'Core omega • 214 contributions',g:'from-violet-400 to-fuchsia-400'},{n:'mateo.k',r:'Plugins • 148 contributions',g:'from-emerald-300 to-cyan-400'},{n:'amina.s',r:'Builder • 121 contributions',g:'from-amber-300 to-orange-400'}];
+  document.getElementById('verifiedList').innerHTML = verified.map(v=>'<div class="flex items-center gap-3 bg-white/5 border border-white/8 rounded-2xl p-3"><span class="w-10 h-10 rounded-full bg-gradient-to-br '+v.g+' grid place-items-center text-xs font-bold text-black shrink-0">'+v.n.slice(0,2).toUpperCase()+'</span><div class="min-w-0 flex-1"><p class="font-bold text-sm flex items-center gap-1.5 truncate">'+v.n+' <span class="verified">✓</span></p><p class="text-xs text-white/50 truncate">'+v.r+'</p></div><span class="text-[10px] font-mono bg-emerald-400/15 text-emerald-300 px-2 py-1 rounded-full shrink-0">VÉRIFIÉ</span></div>').join('');
+})();
+
+// ---------- PROJET A-Z ----------
+const AZ = {
+A:['Architecture','PHASE 01 — ORIGINES','TERMINÉ',"omega repose sur un routeur central qui analyse chaque requête — intention, complexité, coût, latence cible — puis la dirige vers le modèle le plus pertinent parmi 14 moteurs spécialisés. Aucun modèle ne voit plus que ce qu'il doit traiter : le routeur anonymise, tronque et journalise chaque décision, ce qui rend l'ensemble auditable de bout en bout.",['14 modèles orchestrés','142 ms de routage médian','100% des décisions journalisées']],
+B:['Benchmarks','PHASE 01 — ORIGINES','TERMINÉ',"Chaque modèle est évalué en continu sur 38 suites de tests : raisonnement, code, vision, extraction et rédaction. Les scores sont publics sur le dashboard et déclenchent automatiquement un rééquilibrage du routage lorsqu'un modèle régresse.",['38 suites de tests','Évaluation toutes les 6h','Scores 100% publics']],
+C:['Code ouvert','PHASE 01 — ORIGINES','TERMINÉ',"L'intégralité du code d'Hastria — routeur, sandbox, builder et cette interface — est publiée sous licence MIT. 1 248 tests automatisés valident chaque fusion, et tout le monde peut lire, télécharger et proposer des correctifs sans compte.",['Licence MIT','1 248 tests verts','Lecture sans login']],
+D:['Dashboard public','PHASE 02 — TRANSPARENCE','TERMINÉ',"Le tableau de bord affiche les vraies métriques du serveur via l'API /v1/stats : requêtes, latence, qualité, coûts et disponibilité. Aucune donnée n'est filtrée pour les visiteurs anonymes : ce que nous voyons, vous le voyez.",['API publique /v1/stats','Actualisation 5 secondes','Aucun login requis']],
+E:['Écosystème','PHASE 02 — TRANSPARENCE','EN COURS',"Plugins, templates du Builder et modules du futur store composent un écosystème où chaque extension déclare ses besoins avant de s'exécuter. L'ouverture est totale sur la lecture, stricte sur l'exécution.",['47 plugins publiés','12 847 en liste d\u2019attente store','Scopes déclaratifs']],
+F:['Fiabilité','PHASE 02 — TRANSPARENCE','TERMINÉ',"99,98% de disponibilité sur 90 jours, obtenus par redondance multi-région, bascule automatique entre modèles et file d'attente priorisée. En cas de panne d'un moteur, omega reroute en moins de 300 ms.",['99,98% sur 90 jours','Bascule < 300 ms','3 régions actives']],
+G:['Gouvernance','PHASE 03 — COMMUNAUTÉ','EN COURS',"Deux voies d'approbation coexistent : la revue directe du créateur pour le code sensible, et le vote communautaire — 7 jours, 75% de favorables, 50 votants minimum — pour le reste. Chaque décision est consignée publiquement.",['Revue créateur sous 72h','Vote : 75% / 50 votants','Historique public']],
+H:['Hastria (le nom)','PHASE 03 — COMMUNAUTÉ','TERMINÉ',"Hastria fusionne « hasta » — jusqu'au bout — et l'idée d'une étoile guide. Le nom incarne le projet : aller jusqu'au bout de la transparence, et guider chaque requête vers la bonne destination.",['Domaine : hastria.fun','Aucun sous-domaine','Identité éditoriale propre']],
+I:['Intégrations','PHASE 03 — COMMUNAUTÉ','EN COURS',"Slack, Notion, GitHub, Figma, Airtable : les intégrations connectent omega à vos outils via des connecteurs sandboxés à scopes minimaux. Chaque connexion est révocable en un clic et journalisée.",['9 intégrations majeures','Scopes minimaux','Révocation immédiate']],
+J:['Journal des décisions','PHASE 03 — COMMUNAUTÉ','TERMINÉ',"Chaque choix de routage, chaque approbation et chaque incident alimentent un journal public horodaté. C'est la mémoire vérifiable du projet, consultable par tous sans authentification.",['Horodatage signé','Export JSON libre','Rétention 24 mois']],
+K:['Kits de démarrage','PHASE 04 — PRODUIT','EN COURS',"Des kits complets — SaaS, agence, e-commerce, portfolio — combinent templates du Builder, plugins préconfigurés et prompts omega optimisés pour démarrer un projet en une heure.",['4 kits disponibles','Prompts inclus','Déploiement guidé']],
+L:['Latence','PHASE 04 — PRODUIT','TERMINÉ',"184 ms de latence médiane de bout en bout, grâce à la mise en cache sémantique, au routage prédictif et à l'exécution au plus près de l'utilisateur. La cible contractuelle est de 250 ms en P50.",['P50 : 184 ms','Cache sémantique 31%','Cible : 250 ms']],
+M:['Multi-modèles','PHASE 04 — PRODUIT','TERMINÉ',"Le cœur d'omega : 14 modèles spécialisés — texte, code, vision, audio, données — coordonnés par un routeur qui peut aussi les faire collaborer en chaîne sur une même tâche complexe.",['14 modèles actifs','Routage en chaîne','Fusion de réponses']],
+N:['Neutralité','PHASE 04 — PRODUIT','TERMINÉ',"Aucun modèle n'est favorisé par défaut : le routage ne suit que des métriques publiques de qualité, de coût et de latence. Les pondérations sont visibles dans le code source.",['Pondérations publiques','Aucun partenariat caché','Métriques ouvertes']],
+O:['omega','PHASE 05 — SYSTÈME','TERMINÉ',"omega est le nom du système : la dernière lettre grecque pour le système qui tranche en dernier ressort entre tous les modèles. Sa version 4.2 introduit le routage prédictif et la sandbox v2.",['Version 4.2 actuelle','Routage prédictif','Sandbox v2']],
+P:['Plugins','PHASE 05 — SYSTÈME','EN COURS',"47 plugins étendent omega : extraction, automatisation, design, communication. Tous s'exécutent en sandbox isolée avec des scopes explicites, affichés avant toute installation.",['47 plugins au catalogue','Sandbox isolée','Installation avec compte']],
+Q:['Qualité','PHASE 05 — SYSTÈME','EN COURS',"Un score de qualité composite — exactitude, cohérence, satisfaction — est calculé sur des échantillons anonymisés et publié en continu. Il pèse 45% dans les décisions de routage.",['Score actuel : 94,2/100','45% du routage','Échantillons anonymes']],
+R:['Routage','PHASE 05 — SYSTÈME','TERMINÉ',"Le routeur combine analyse d'intention, budget et historique pour choisir — ou composer — la meilleure réponse. Chaque décision expose son motif dans le journal public.",['Motif exposé publiquement','Budget par requête','Composition multi-modèles']],
+S:['Sandbox et scopes','PHASE 06 — SÉCURITÉ','TERMINÉ',"Chaque plugin déclare ses scopes — lire un calendrier, écrire un fichier, appeler une API — et la sandbox bloque techniquement tout le reste. Un dépassement coupe l'exécution et alerte l'auteur.",['Scopes déclaratifs','Blocage technique','Alerte en temps réel']],
+T:['Transparence','PHASE 06 — SÉCURITÉ','TERMINÉ',"Stats, code, votes, incidents, coûts : Hastria publie ce que la plupart des plateformes cachent. La transparence n'est pas une page marketing, c'est l'architecture même du produit.",['Tout est indexable','Aucun mur de login','Données exportables']],
+U:['Utilisateurs vérifiés','PHASE 06 — SÉCURITÉ','EN COURS',"1 284 contributeurs, dont les comptes vérifiés portent un badge public après une première contribution approuvée et 90% d'approbations sur 30 jours. La confiance se prouve, elle ne se déclare pas.",['1 284 contributeurs','Badge public vérifié','90% d\u2019approbations requis']],
+V:['Vote communautaire','PHASE 07 — GOUVERNANCE','EN COURS',"Plugins, templates et documentation peuvent être approuvés par la communauté : 7 jours de vote, seuil de 75% et quorum de 50 votants. Les résultats sont définitifs et publics.",['7 jours de vote','Seuil : 75%','Quorum : 50 votants']],
+W:['Web Builder Pro','PHASE 07 — GOUVERNANCE','TERMINÉ',"Le Builder génère des sites professionnels — 4 templates, palettes, sections modulables — avec une preview publique et partageable sans compte. Seule la publication requiert une authentification.",['4 templates pro','Preview sans login','Export HTML inclus']],
+X:['Expérience (le X)','PHASE 08 — VISION','EN COURS',"Chaque écran d'Hastria est conçu comme une page éditoriale : typographie expressive, données denses mais lisibles, et zéro friction pour explorer avant de s'engager.",['98/100 Lighthouse','Design éditorial','Zéro friction']],
+Y:['Yield — rendement','PHASE 08 — VISION','EN COURS',"En routant chaque requête vers le modèle juste assez puissant, omega réduit les coûts de 38% à qualité égale. Les économies réalisées sont publiées chaque mois.",['-38% de coûts','Qualité constante','Rapport mensuel public']],
+Z:['Zéro confiance','PHASE 08 — VISION','TERMINÉ',"Le principe qui clôt l'alphabet : ne faire confiance à rien par défaut. Chaque plugin est sandboxé, chaque scope est vérifié, chaque compte se prouve. De A à Z, Hastria est vérifiable.",['Zero Trust partout','Vérification continue','De A à Z, public']],
+};
+(function(){
+  const nav=document.getElementById('azNav');
+  nav.innerHTML = Object.keys(AZ).map(l=>'<button class="az-btn '+(l==='A'?'active':'')+'" data-az="'+l+'" onclick="selectAZ(\''+l+'\')">'+l+'</button>').join('');
+  selectAZ('A');
+  const road=[['Routage prédictif omega 4.3',82,'emerald'],['Store de modules — paiement sécurisé',68,'amber'],['Plugins vidéo et audio temps réel',44,'violet'],['Builder — collaboration multi-utilisateurs',31,'violet']];
+  document.getElementById('roadmap').innerHTML = road.map(r=>'<div><div class="flex justify-between text-sm mb-1.5"><span class="font-semibold">'+r[0]+'</span><span class="font-mono text-xs text-white/50">'+r[1]+'%</span></div><div class="progress"><i style="width:'+r[1]+'%"></i></div></div>').join('');
+})();
+function selectAZ(l){
+  const d=AZ[l]; if(!d) return;
+  document.querySelectorAll('[data-az]').forEach(b=>b.classList.toggle('active', b.dataset.az===l));
+  document.getElementById('azLetter').textContent=l;
+  document.getElementById('azTitle').textContent=d[0];
+  document.getElementById('azPhase').textContent=d[1];
+  document.getElementById('azStatus').textContent=d[2];
+  document.getElementById('azText').textContent=d[3];
+  document.getElementById('azFacts').innerHTML=d[4].map(f=>'<div class="bg-white/5 border border-white/8 rounded-xl p-3.5 text-[13px] font-semibold leading-snug">'+f+'</div>').join('');
+}
+
+// ---------- DASHBOARD : MODELES + GRAPHIQUES ----------
+const MODELS=[
+ {name:'omega-large',type:'Raisonnement',status:'En ligne',req:'812 400',lat:'311 ms',q:96.8,cost:'0,0080 €',trend:'+8,2%'},
+ {name:'omega-mini',type:'Rapide / quotidien',status:'En ligne',req:'1 204 900',lat:'142 ms',q:91.4,cost:'0,0011 €',trend:'+14,6%'},
+ {name:'omega-code',type:'Code',status:'En ligne',req:'402 150',lat:'201 ms',q:95.1,cost:'0,0034 €',trend:'+11,3%'},
+ {name:'omega-vision',type:'Vision / image',status:'En ligne',req:'231 480',lat:'268 ms',q:93.7,cost:'0,0049 €',trend:'+6,9%'},
+ {name:'omega-data',type:'Données / extraction',status:'En ligne',req:'118 930',lat:'176 ms',q:94.9,cost:'0,0022 €',trend:'+9,4%'},
+ {name:'omega-audio',type:'Audio / transcription',status:'Maintenance',req:'77 531',lat:'—',q:92.2,cost:'0,0028 €',trend:'-1,2%'},
+];
+function renderModels(filter=''){
+  const tb=document.getElementById('modelsTable'); if(!tb) return;
+  tb.innerHTML = MODELS.filter(m=>m.name.includes(filter.toLowerCase())).map(m=>'<tr class="border-b border-white/5 hover:bg-white/[0.03]"><td class="p-4"><p class="font-bold font-mono text-[13px]">'+m.name+'</p><p class="text-xs text-white/45">'+m.type+'</p></td><td><span class="text-xs font-bold px-2.5 py-1 rounded-full '+(m.status==='En ligne'?'bg-emerald-400/15 text-emerald-300':'bg-amber-400/15 text-amber-300')+'">'+m.status+'</span></td><td class="font-mono text-[13px]">'+m.req+'</td><td class="font-mono text-[13px]">'+m.lat+'</td><td><span class="font-bold">'+m.q+'</span><span class="text-white/40">/100</span></td><td class="font-mono text-[13px]">'+m.cost+'</td><td class="'+(m.trend.startsWith('+')?'text-emerald-300':'text-rose-300')+' font-semibold text-[13px]">'+m.trend+'</td></tr>').join('');
+}
+function filterModels(v){ renderModels(v); }
+let chartReq=null, chartModels=null;
+function initCharts(){
+  const c1=document.getElementById('chartReq'); if(!c1 || typeof Chart==='undefined') return;
+  if(chartReq) chartReq.destroy(); if(chartModels) chartModels.destroy();
+  const labels=Array.from({length:24},(_,i)=>i+'h');
+  chartReq=new Chart(c1,{type:'line',data:{labels:labels,datasets:[{label:'Requêtes / heure',data:[82,64,48,38,34,42,68,96,124,142,156,148,138,152,166,172,158,146,138,152,168,142,118,96].map(v=>v*1000),borderColor:'#7C6CFF',backgroundColor:'rgba(124,108,255,.14)',fill:true,tension:.45,pointRadius:0,borderWidth:2.5},{label:'Latence (ms)',data:[210,198,186,178,172,180,192,205,214,208,196,190,184,188,196,204,198,186,180,188,202,196,188,182],borderColor:'#00E8B8',tension:.45,pointRadius:0,borderWidth:2,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'#9A9AA8',font:{family:'JetBrains Mono',size:10}}}},scales:{x:{ticks:{color:'#6B6B7A',font:{size:10}},grid:{color:'rgba(255,255,255,.04)'}},y:{ticks:{color:'#6B6B7A',font:{size:10},callback:v=>(v/1000)+'k'},grid:{color:'rgba(255,255,255,.04)'}},y1:{position:'right',ticks:{color:'#00E8B8',font:{size:10}},grid:{display:false}}}}});
+  chartModels=new Chart(document.getElementById('chartModels'),{type:'doughnut',data:{labels:['omega-mini','omega-large','omega-code','omega-vision','Autres'],datasets:[{data:[42,28,14,9,7],backgroundColor:['#7C6CFF','#00E8B8','#FFB340','#F472B6','#3A3A48'],borderColor:'#121218',borderWidth:3}]},options:{responsive:true,maintainAspectRatio:false,cutout:'64%',plugins:{legend:{position:'bottom',labels:{color:'#9A9AA8',font:{size:11},padding:14,usePointStyle:true}}}}});
+}
+function updateCharts(){ toast('Plage mise à jour — données rechargées depuis l\u2019API.'); initCharts(); }
+
+// ---------- CODE SOURCE ----------
+const FILES={
+'omega/core/router.ts':{lang:'TypeScript • 142 lignes',code:`// Hastria omega — Routeur multi-modèles (extrait public intégral)
+import { Registry } from "./registry";
+import { scoreQuality, estimateCost } from "./scoring";
+
+export interface RouteDecision {
+  model: string;
+  confidence: number;
+  reason: string;        // motif public, journalise
+  estimatedCostEur: number;
+}
+
+export async function route(req: OmegaRequest): Promise<RouteDecision> {
+  const intent = await classifyIntent(req.prompt);
+  const candidates = Registry.byCapability(intent.capability);
+
+  const ranked = candidates
+    .map(m => ({
+      model: m.id,
+      score: 0.45 * scoreQuality(m, intent)
+           + 0.30 * latencyScore(m)
+           + 0.25 * costScore(m, req.budget),
+    }))
+    .sort((a, b) => b.score - a.score);
+
+  const best = ranked[0];
+  await Journal.logDecision(req.id, best); // 100% public et auditable
+  return { model: best.model, confidence: best.score,
+           reason: intent.label, estimatedCostEur: estimateCost(best) };
+}`},
+'omega/core/sandbox.ts':{lang:'TypeScript • 98 lignes',code:`// Sandbox v2 — execution isolee des plugins, scopes declaratifs
+export const SANDBOX_POLICY = {
+  network: "deny-by-default",
+  filesystem: "virtual-readonly",
+  maxMemoryMb: 256,
+  maxCpuMs: 5000,
+};
+
+export async function runPlugin(plugin: Plugin, scopes: Scope[]) {
+  assertScopesDeclared(plugin, scopes); // aucun scope implicite
+  const ctx = createIsolatedContext(SANDBOX_POLICY);
+  ctx.onViolation = (v) => { killExecution(plugin.id); alertAuthor(v); };
+  return ctx.execute(plugin.entrypoint, { scopes });
+}`},
+'omega/models/registry.json':{lang:'JSON • 14 modèles',code:`{
+  "version": "4.2.0",
+  "models": [
+    { "id": "omega-large",  "capability": "reasoning", "p50Ms": 311 },
+    { "id": "omega-mini",   "capability": "general",   "p50Ms": 142 },
+    { "id": "omega-code",   "capability": "code",      "p50Ms": 201 },
+    { "id": "omega-vision", "capability": "vision",    "p50Ms": 268 },
+    { "id": "omega-data",   "capability": "extract",   "p50Ms": 176 }
+  ],
+  "routingWeights": { "quality": 0.45, "latency": 0.30, "cost": 0.25 }
+}`},
+'builder/engine/render.ts':{lang:'TypeScript • 210 lignes',code:`// Builder Pro — moteur de rendu des previews publiques
+export function renderSite(config: SiteConfig): string {
+  const theme = THEMES[config.palette];
+  return compose([
+    config.sections.hero    && Hero(config, theme),
+    config.sections.features && Features(config, theme),
+    config.sections.pricing && Pricing(config, theme),
+    config.sections.faq     && Faq(config, theme),
+  ].filter(Boolean));
+}
+// Preview partageable sans login : /p/:slug — indexable, SEO inclus`},
+'api/v1/stats.ts':{lang:'TypeScript • 64 lignes',code:`// Endpoint public — aucune authentification requise
+export async function GET() {
+  return Response.json({
+    models: await Metrics.activeModels(),
+    requestsToday: await Metrics.requestsToday(),
+    latencyP50Ms: await Metrics.latencyP50(),
+    uptime90d: 99.98,
+    qualityScore: 94.2,
+    updatedAt: new Date().toISOString(),
+  }, { headers: { "Cache-Control": "public, max-age=5" } });
+}`},
+'plugins SDK — scopes.md':{lang:'Markdown • Guide',code:`# Declarer les scopes d'un plugin
+
+Chaque plugin publie ses scopes AVANT installation.
+L'utilisateur voit exactement ce qui sera accessible.
+
+| Scope              | Effet                          |
+|--------------------|--------------------------------|
+| calendar.read      | Lire les evenements            |
+| files.write        | Ecrire dans le dossier plugin  |
+| network.api        | Appeler les API declarees      |
+
+Tout acces hors scope est bloque par la sandbox,
+journalise, et signale a l'auteur du plugin.`},
+};
+let currentFile='omega/core/router.ts';
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function highlight(code){
+  return escapeHtml(code).split('\n').map(line=>{
+    let l=line.replace(/(\/\/.*|#.*)$/,'<span style="color:#6B7A6B">$1</span>')
+      .replace(/\b(import|export|const|let|async|await|return|function|interface|new|from)\b/g,'<span style="color:#C9A7FF">$1</span>')
+      .replace(/(&quot;|")([^"\n]*?)(")/g,'<span style="color:#FFD479">"$2"</span>');
+    return '<span class="code-line">'+(l||' ')+'</span>';
+  }).join('\n');
+}
+function renderFiles(filter=''){
+  const tree=document.getElementById('fileTree'); if(!tree) return;
+  tree.innerHTML = Object.keys(FILES).filter(f=>f.toLowerCase().includes(filter.toLowerCase())).map(f=>'<button onclick="openFile(\''+f.replace(/'/g,"\\'")+'\')" class="w-full text-left px-3 py-2 rounded-lg flex gap-2 items-center '+(f===currentFile?'bg-[#F4F1EA] text-black font-semibold':'hover:bg-white/5 text-white/75')+'"><span class="font-mono text-[10px] opacity-60 shrink-0">'+(f.endsWith('.json')?'{}':f.endsWith('.md')?'MD':'TS')+'</span><span class="truncate">'+f+'</span></button>').join('');
+  document.getElementById('codeTabs').innerHTML = Object.keys(FILES).slice(0,4).map(f=>'<button onclick="openFile(\''+f.replace(/'/g,"\\'")+'\')" class="px-3 py-1.5 rounded-lg font-mono text-[11px] whitespace-nowrap '+(f===currentFile?'bg-white text-black font-bold':'bg-white/5 text-white/60')+'">'+f.split('/').pop()+'</button>').join('');
+}
+function openFile(f){ currentFile=f; const file=FILES[f]; document.getElementById('codePath').textContent=f; document.getElementById('codeMeta').textContent=file.lang; document.getElementById('codeView').innerHTML=highlight(file.code); renderFiles(); }
+function filterFiles(v){ renderFiles(v); }
+function copyCode(){ navigator.clipboard && navigator.clipboard.writeText(FILES[currentFile].code); toast('Fichier '+currentFile+' copié dans le presse-papiers.'); }
+function downloadCode(){ toast('Téléchargement de hastria-omega-source.zip (4,2 Mo) — code intégral, licence MIT.'); }
+
+// ---------- PLUGINS ----------
+const PLUGINS=[
+ {id:1,name:'Notion Sync Pro',icon:'N',cat:'Productivité',author:'lea.dev',verified:true,installs:'48 210',rating:'4,9',version:'v3.2',scopes:['network.api','files.read'],desc:"Synchronise vos espaces Notion avec omega : résumé automatique, extraction d'actions et recherche sémantique dans vos pages, sans jamais lire au-delà des pages que vous sélectionnez."},
+ {id:2,name:'Sheets Data Bridge',icon:'S',cat:'Données',author:'mateo.k',verified:true,installs:'36 540',rating:'4,8',version:'v2.7',scopes:['network.api','data.read'],desc:"Connecte vos feuilles de calcul à omega-data pour nettoyer, enrichir et visualiser vos données. Lecture seule par défaut, écriture uniquement sur les onglets autorisés."},
+ {id:3,name:'Slack Digest',icon:'Sl',cat:'Communication',author:'amina.s',verified:true,installs:'29 870',rating:'4,7',version:'v4.0',scopes:['messages.read','network.api'],desc:"Un résumé quotidien de vos canaux Slack, généré par omega-mini. Ne lit que les canaux publics que vous désignez, ne publie jamais sans votre validation."},
+ {id:4,name:'GitHub Reviewer',icon:'G',cat:'Développement',author:'jules.r',verified:true,installs:'27 430',rating:'4,9',version:'v5.1',scopes:['repo.read','pr.comment'],desc:"Relecture automatique de pull requests par omega-code : bugs probables, tests manquants et suggestions concrètes, postées en commentaire brouillon uniquement."},
+ {id:5,name:'Figma Tokens',icon:'F',cat:'Design',author:'nina.p',verified:true,installs:'18 920',rating:'4,8',version:'v1.9',scopes:['files.read','files.write'],desc:"Extrait et synchronise vos design tokens Figma vers le Builder Hastria. Écriture limitée au fichier de tokens que vous créez pour le plugin."},
+ {id:6,name:'Calendar Brief',icon:'C',cat:'Productivité',author:'lea.dev',verified:true,installs:'22 610',rating:'4,6',version:'v2.2',scopes:['calendar.read'],desc:"Prépare un brief avant chaque réunion : contexte, documents liés et points d'attention. Accès en lecture seule à votre calendrier, aucun envoi d'e-mail."},
+ {id:7,name:'PDF Extractor X',icon:'P',cat:'Données',author:'omar.b',verified:false,installs:'15 340',rating:'4,5',version:'v3.8',scopes:['files.read','data.write'],desc:"Extraction structurée de PDF — tableaux, factures, contrats — par omega-vision et omega-data. Les fichiers ne quittent jamais la sandbox d'exécution."},
+ {id:8,name:'Mail Triage',icon:'M',cat:'Communication',author:'sophie.l',verified:true,installs:'13 780',rating:'4,4',version:'v2.0',scopes:['mail.read','mail.label'],desc:"Trie et étiquette vos e-mails par priorité avec omega-mini. Peut appliquer des libellés, ne peut ni envoyer ni supprimer de messages."},
+ {id:9,name:'API Monitor',icon:'A',cat:'Développement',author:'mateo.k',verified:true,installs:'11 250',rating:'4,7',version:'v1.5',scopes:['network.api'],desc:"Surveille vos API et alerte avant que vos utilisateurs ne remarquent une panne. N'appelle que les URL de santé que vous déclarez explicitement."},
+];
+(function(){
+  const scopes=[...new Set(PLUGINS.flatMap(p=>p.scopes))];
+  document.getElementById('scopeFilters').innerHTML = '<button onclick="setScope(\'\')" class="scope-btn chip !normal-case !tracking-normal font-sans font-semibold" data-scope="">Tous les scopes</button>'+scopes.map(s=>'<button onclick="setScope(\''+s+'\')" class="scope-btn chip !normal-case !tracking-normal font-sans font-semibold" data-scope="'+s+'">'+s+'</button>').join('');
+})();
+function setScope(s){ selectedScope=s; renderPlugins(); }
+function renderPlugins(){
+  const q=(document.getElementById('pluginSearch').value||'').toLowerCase();
+  const cat=document.getElementById('pluginCat').value;
+  const sort=document.getElementById('pluginSort').value;
+  let list=PLUGINS.filter(p=>(!cat||p.cat===cat)&&(!selectedScope||p.scopes.includes(selectedScope))&&(p.name.toLowerCase().includes(q)||p.author.includes(q)||p.scopes.join(' ').includes(q)));
+  if(sort==='note') list.sort((a,b)=>parseFloat(b.rating.replace(',','.'))-parseFloat(a.rating.replace(',','.')));
+  if(sort==='recent') list.sort((a,b)=>b.id-a.id);
+  document.querySelectorAll('.scope-btn').forEach(b=>{ const on=b.dataset.scope===selectedScope; b.style.background=on?'#F4F1EA':''; b.style.color=on?'#07070B':''; });
+  document.getElementById('pluginsGrid').innerHTML = list.length ? list.map(p=>'<article class="card p-5 flex flex-col"><div class="flex justify-between"><span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-500/30 to-emerald-400/20 grid place-items-center font-mono font-bold text-violet-200">'+p.icon+'</span><span class="text-[11px] font-mono bg-white/8 border border-white/10 px-2 py-1 rounded-full h-fit">'+p.cat+'</span></div><h3 class="font-bold text-[17px] mt-4">'+p.name+'</h3><p class="text-[13px] text-white/50 flex items-center gap-1.5 mt-0.5">par '+p.author+(p.verified?' <span class="verified" style="width:14px;height:14px;font-size:8px">✓</span>':'')+' • '+p.version+'</p><p class="text-sm text-white/60 leading-relaxed mt-2.5 flex-1">'+p.desc.slice(0,110)+'...</p><div class="flex flex-wrap gap-1.5 mt-3">'+p.scopes.map(s=>'<span class="font-mono text-[10px] bg-black/40 border border-white/10 rounded-md px-2 py-1 text-emerald-300">'+s+'</span>').join('')+'</div><div class="flex items-center justify-between mt-4 pt-4 border-t border-white/8"><span class="text-xs text-white/50"><strong class="text-white">'+p.installs+'</strong> installs • <strong class="text-amber-300">'+p.rating+'</strong>/5</span></div><div class="grid grid-cols-2 gap-2 mt-3"><button onclick="openPlugin('+p.id+')" class="btn-outline justify-center !py-2.5 text-[13px]">Détails</button><button onclick="quickInstall('+p.id+')" class="btn-primary justify-center !py-2.5 text-[13px]">Installer</button></div></article>').join('') : '<p class="text-white/50 col-span-full card p-8 text-center">Aucun plugin ne correspond à ces filtres. Essayez un autre scope ou une autre catégorie.</p>';
+}
+function openPlugin(id){ currentPlugin=PLUGINS.find(p=>p.id===id); document.getElementById('pmIcon').textContent=currentPlugin.icon; document.getElementById('pmName').textContent=currentPlugin.name; document.getElementById('pmAuthor').innerHTML='par '+currentPlugin.author+(currentPlugin.verified?' — compte vérifié':'')+' • '+currentPlugin.cat; document.getElementById('pmDesc').textContent=currentPlugin.desc; document.getElementById('pmScopes').innerHTML=currentPlugin.scopes.map(s=>'<span class="font-mono text-[11px] bg-emerald-400/10 border border-emerald-400/25 text-emerald-300 rounded-lg px-2.5 py-1.5">'+s+'</span>').join(''); document.getElementById('pmInstalls').textContent=currentPlugin.installs; document.getElementById('pmRating').textContent=currentPlugin.rating+' / 5'; document.getElementById('pmVersion').textContent=currentPlugin.version; document.getElementById('pluginModal').classList.remove('hidden'); }
+function closePlugin(){ document.getElementById('pluginModal').classList.add('hidden'); }
+function quickInstall(id){ currentPlugin=PLUGINS.find(p=>p.id===id); installPlugin(); }
+function installPlugin(){ if(!currentUser){ closePlugin(); openAuth('Connexion requise pour installer « '+currentPlugin.name+' ». Le catalogue reste public sans login.'); return; } closePlugin(); toast('« '+currentPlugin.name+' » installé en sandbox pour '+currentUser.name+' — scopes actifs : '+currentPlugin.scopes.join(', ')+'.'); }
+
+// ---------- STORE ----------
+const STORE_MODULES=[
+ {name:'omega Analytics Suite',cat:'Données',price:'À venir',desc:'Tableaux de bord avancés branchés sur omega-data, avec alertes prédictives.',pct:82},
+ {name:'Commerce Connect',cat:'E-commerce',price:'À venir',desc:'Catalogue, panier et paiement connectés au Builder Pro en quelques clics.',pct:64},
+ {name:'Voice Studio',cat:'Audio',price:'À venir',desc:'Voix de synthèse et transcription temps réel propulsées par omega-audio.',pct:47},
+ {name:'SEO Autopilot',cat:'Marketing',price:'À venir',desc:'Audit, maillage et contenus optimisés générés et suivis par omega-large.',pct:71},
+ {name:'Team Workflows',cat:'Productivité',price:'À venir',desc:'Automatisations multi-étapes entre vos plugins, sans écrire de code.',pct:58},
+ {name:'Vision Commerce',cat:'Vision',price:'À venir',desc:'Recherche visuelle et génération d\u2019images produits via omega-vision.',pct:39},
+];
+document.getElementById('storeGrid').innerHTML = STORE_MODULES.map(m=>'<article class="card p-5 opacity-90"><div class="flex justify-between"><span class="text-[11px] font-mono bg-white/8 border border-white/10 px-2 py-1 rounded-full">'+m.cat+'</span><span class="text-[11px] font-bold bg-amber-400 text-black px-2 py-1 rounded-full">BIENTÔT</span></div><h3 class="font-bold text-[17px] mt-4">'+m.name+'</h3><p class="text-sm text-white/60 leading-relaxed mt-1.5">'+m.desc+'</p><div class="mt-4"><div class="flex justify-between text-[11px] font-mono text-white/45 mb-1.5"><span>PRÉPARATION</span><span>'+m.pct+'%</span></div><div class="progress"><i style="width:'+m.pct+'%"></i></div></div><div class="grid grid-cols-2 gap-2 mt-5"><button disabled class="rounded-full py-2.5 text-[13px] font-bold bg-white/8 text-white/35 cursor-not-allowed border border-white/10">Achat indisponible</button><button onclick="notifyModule(\''+m.name+'\')" class="btn-outline justify-center !py-2.5 text-[13px]">Me prévenir</button></div><p class="text-[11px] text-white/35 mt-2.5">Prix : '+m.price+' — aucun achat ni installation au lancement.</p></article>').join('');
+function notifyStore(e){ e.preventDefault(); const em=document.getElementById('storeEmail'); document.getElementById('storeMsg').textContent='Merci — '+(em&&em.value?em.value:'votre adresse')+' est inscrite. Vous serez prévenu dès l\u2019ouverture du store.'; toast('Inscription confirmée à la liste d\u2019attente du store Hastria.'); if(em) em.value=''; }
+function notifyModule(n){ if(currentUser){ toast('Vous serez prévenu du lancement de « '+n+' ».'); } else openAuth('Connectez-vous pour être prévenu du lancement de « '+n+' ».'); }
+
+// ---------- BUILDER ----------
+let bTemplate='Agence', bPalette=0, bDevice='desktop';
+const bSectionsState={hero:true,features:true,pricing:true,faq:false,cta:true};
+const PALETTES=[{name:'Violet omega',bg:'#7C6CFF',soft:'#EFEFFF',ink:'#12121A'},{name:'Émeraude',bg:'#00B894',soft:'#E9FBF4',ink:'#0C1A16'},{name:'Noir éditorial',bg:'#111116',soft:'#F4F1EA',ink:'#111116'},{name:'Corail',bg:'#FF6B4A',soft:'#FFF1EC',ink:'#221110'}];
+const TEMPLATES=['Agence','SaaS','Portfolio','E-commerce'];
+document.getElementById('bTemplates').innerHTML = TEMPLATES.map(t=>'<button onclick="setTemplate(\''+t+'\')" data-tpl="'+t+'" class="tpl-btn border rounded-xl py-3 text-[13px] font-bold '+(t===bTemplate?'bg-[#F4F1EA] text-black border-white':'border-white/15 hover:bg-white/5')+'">'+t+'</button>').join('');
+document.getElementById('bPalettes').innerHTML = PALETTES.map((p,i)=>'<button onclick="setPalette('+i+')" title="'+p.name+'" class="w-10 h-10 rounded-full border-2 '+(i===0?'border-white':'border-white/20')+' palette-btn" data-pal="'+i+'" style="background:'+p.bg+'"></button>').join('')+'<span class="text-xs text-white/50 self-center ml-1" id="palName">Violet omega</span>';
+document.getElementById('bSections').innerHTML = Object.keys(bSectionsState).map(k=>'<div class="flex items-center justify-between bg-white/[0.04] rounded-xl px-3.5 py-2.5"><span class="text-sm font-medium capitalize">'+({hero:'Hero',features:'Fonctionnalités',pricing:'Tarifs',faq:'FAQ',cta:'Appel à l\u2019action'})[k]+'</span><span class="toggle '+(bSectionsState[k]?'on':'')+'" data-sec="'+k+'" onclick="toggleSection(\''+k+'\',this)"></span></div>').join('');
+document.querySelectorAll('#bDevice button').forEach(b=>b.addEventListener('click',()=>{ bDevice=b.dataset.dev; document.querySelectorAll('#bDevice button').forEach(x=>{ x.className='py-2 rounded-lg text-xs font-bold '+(x.dataset.dev===bDevice?'bg-white text-black':'text-white/60'); }); renderBuilder(); }));
+function setTemplate(t){ bTemplate=t; document.querySelectorAll('.tpl-btn').forEach(b=>{ const on=b.dataset.tpl===t; b.className='tpl-btn border rounded-xl py-3 text-[13px] font-bold '+(on?'bg-[#F4F1EA] text-black border-white':'border-white/15 hover:bg-white/5'); }); renderBuilder(); }
+function setPalette(i){ bPalette=i; document.getElementById('palName').textContent=PALETTES[i].name; document.querySelectorAll('.palette-btn').forEach(b=>b.style.borderColor=(+b.dataset.pal===i?'white':'rgba(255,255,255,.2)')); renderBuilder(); }
+function toggleSection(k,el){ bSectionsState[k]=!bSectionsState[k]; el.classList.toggle('on',bSectionsState[k]); renderBuilder(); }
+function renderBuilder(){
+  const name=document.getElementById('bName').value||'Mon site';
+  const headline=document.getElementById('bHeadline').value||'Bienvenue';
+  const pal=PALETTES[bPalette];
+  const slug=name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'mon-site';
+  document.getElementById('bShareLink').textContent='hastria.fun/p/'+slug;
+  document.getElementById('bUrlBar').textContent='hastria.fun/p/'+slug;
+  const width = bDevice==='mobile' ? 'max-width:380px' : bDevice==='tablet' ? 'max-width:640px' : 'max-width:920px';
+  let h='<div style="'+width+'" class="mx-auto bg-white text-[#141419] rounded-[18px] overflow-hidden shadow-2xl text-left transition-all">';
+  h+='<div class="flex items-center justify-between px-6 h-14 border-b border-black/8"><span class="font-bold tracking-tight" style="font-family:Space Grotesk">'+name+'</span><span class="hidden sm:flex gap-4 text-[12px] font-medium text-black/55"><span>Accueil</span><span>Services</span><span>Tarifs</span><span>Contact</span></span><span class="text-[12px] font-bold text-white px-3.5 py-2 rounded-full" style="background:'+pal.bg+'">Commencer</span></div>';
+  if(bSectionsState.hero) h+='<div class="px-6 sm:px-10 py-12 sm:py-16" style="background:'+pal.soft+'"><p class="text-[10px] font-bold tracking-[.18em]" style="color:'+pal.bg+'">'+bTemplate.toUpperCase()+' — PROPULSÉ PAR HASTRIA OMEGA</p><h1 class="text-[30px] sm:text-[42px] font-bold leading-[1.04] tracking-tight mt-3" style="font-family:Space Grotesk">'+headline+'</h1><p class="text-black/55 text-[14px] leading-relaxed mt-3 max-w-[440px]">Site généré avec le Builder Hastria Pro, optimisé SEO et prévisualisé en temps réel. Publiez-le sur hastria.fun en un clic.</p><div class="flex gap-2 mt-6"><span class="text-[13px] font-bold text-white px-5 py-3 rounded-full" style="background:'+pal.bg+'">Demander une démo</span><span class="text-[13px] font-bold px-5 py-3 rounded-full border border-black/15">Nos réalisations</span></div></div>';
+  if(bSectionsState.features) h+='<div class="px-6 sm:px-10 py-10 grid sm:grid-cols-3 gap-4">'+[['Rapide','98/100 Lighthouse, chargement instantané.'],['Optimisé SEO','Balises, métadonnées et indexation intégrées.'],['Propulsé par omega','Contenus assistés par le système multi-modèles.']].map(f=>'<div class="border border-black/8 rounded-2xl p-4"><p class="w-8 h-8 rounded-lg grid place-items-center text-white text-sm font-bold mb-3" style="background:'+pal.bg+'">✓</p><p class="font-bold text-[14px]">'+f[0]+'</p><p class="text-[12px] text-black/50 leading-relaxed mt-1">'+f[1]+'</p></div>').join('')+'</div>';
+  if(bSectionsState.pricing) h+='<div class="px-6 sm:px-10 pb-10"><p class="font-bold text-[20px]" style="font-family:Space Grotesk">Tarifs simples</p><div class="grid sm:grid-cols-3 gap-3 mt-4">'+[['Essentiel','19 €/mois',false],['Pro','49 €/mois',true],['Équipe','99 €/mois',false]].map(p=>'<div class="rounded-2xl p-5 '+(p[2]?'text-white':'border border-black/10')+'" style="'+(p[2]?'background:'+pal.bg:'')+'"><p class="text-[12px] font-bold '+(p[2]?'text-white/70':'text-black/45')+'">'+p[0]+'</p><p class="font-bold text-[22px] mt-1">'+p[1]+'</p><p class="text-[12px] '+(p[2]?'text-white/75':'text-black/50')+' mt-2 leading-relaxed">Tout inclus, sans engagement, support sous 24h.</p></div>').join('')+'</div></div>';
+  if(bSectionsState.faq) h+='<div class="px-6 sm:px-10 pb-10 space-y-2">'+[['Puis-je utiliser mon propre domaine ?','Oui, connectez votre domaine ou utilisez hastria.fun sans sous-domaine.'],['Le site est-il indexé par Google ?','Oui : HTML sémantique, métadonnées et sitemap générés automatiquement.']].map(f=>'<div class="border border-black/8 rounded-xl px-4 py-3.5"><p class="font-bold text-[13px]">'+f[0]+'</p><p class="text-[12px] text-black/50 mt-1">'+f[1]+'</p></div>').join('')+'</div>';
+  if(bSectionsState.cta) h+='<div class="mx-6 sm:mx-10 mb-10 rounded-2xl px-6 py-8 text-center text-white" style="background:'+pal.ink+'"><p class="font-bold text-[20px]" style="font-family:Space Grotesk">Prêt à lancer '+name+' ?</p><p class="text-white/60 text-[13px] mt-1.5">Rejoignez les builders qui publient avec Hastria.</p><span class="inline-block bg-white text-black text-[13px] font-bold px-5 py-3 rounded-full mt-4">Commencer maintenant</span></div>';
+  h+='<div class="px-6 py-5 bg-black/[0.03] flex justify-between text-[11px] text-black/40 font-medium"><span>© 2026 '+name+'</span><span>Créé avec Hastria Builder Pro</span></div></div>';
+  document.getElementById('bPreview').innerHTML=h;
+}
+function copyShare(){ navigator.clipboard && navigator.clipboard.writeText('https://'+document.getElementById('bShareLink').textContent); toast('Lien de preview public copié — accessible sans login et indexable.'); }
+function exportBuilder(){ const blob=new Blob([document.getElementById('bPreview').innerHTML],{type:'text/html'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='site-hastria.html'; a.click(); toast('Code HTML exporté — votre site est prêt à être hébergé partout.'); }
+
+// ---------- CONTRIBUTEURS / VOTES ----------
+let votes=[
+ {id:1,title:'Plugin « DeepL Translate » — traduction contextuelle',author:'omar.b',for:412,against:96,ends:'Se termine dans 3 jours',tags:'Plugin • network.api'},
+ {id:2,title:'Template Builder « Restaurant » — réservation intégrée',author:'sophie.l',for:288,against:41,ends:'Se termine dans 5 jours',tags:'Template • Builder'},
+ {id:3,title:'Documentation omega — guide de routage avancé (FR)',author:'nina.p',for:197,against:18,ends:'Se termine dans 6 jours',tags:'Documentation'},
+];
+function renderVotes(){
+  document.getElementById('votesList').innerHTML = votes.map(v=>{ const total=v.for+v.against; const pct=Math.round(v.for/total*100); const done=voted[v.id]; return '<article class="bg-white/[0.04] border border-white/8 rounded-2xl p-4"><div class="flex flex-wrap justify-between gap-2"><p class="font-bold text-[15px] max-w-[420px]">'+v.title+'</p><span class="text-[11px] font-mono bg-white/8 px-2 py-1 rounded-full h-fit">'+v.ends+'</span></div><p class="text-xs text-white/50 mt-1">par '+v.author+' • '+v.tags+' • '+total+' votants (quorum : 50)</p><div class="flex justify-between text-xs font-mono mt-3 mb-1.5"><span class="text-emerald-300">POUR '+v.for+' — '+pct+'%</span><span class="text-white/40">CONTRE '+v.against+'</span></div><div class="progress"><i style="width:'+pct+'%"></i></div><p class="text-[11px] text-white/40 mt-2">Seuil d\u2019approbation : 75% — '+(pct>=75?'<span class="text-emerald-300 font-bold">atteint</span>':'<span class="text-amber-300 font-bold">non atteint</span>')+'</p><div class="flex gap-2 mt-3"><button '+(done?'disabled':'')+' onclick="castVote('+v.id+',1)" class="flex-1 rounded-full py-2.5 text-[13px] font-bold '+(done?'bg-white/8 text-white/35 cursor-not-allowed':'bg-emerald-400 text-black')+'">'+(done?'Vote enregistré':'Voter pour')+'</button><button '+(done?'disabled':'')+' onclick="castVote('+v.id+',-1)" class="flex-1 rounded-full py-2.5 text-[13px] font-bold border '+(done?'border-white/10 text-white/35 cursor-not-allowed':'border-white/20 hover:bg-white/5')+'">Voter contre</button></div></article>'; }).join('');
+}
+function castVote(id,dir){ if(!currentUser){ openAuth('Connexion requise pour voter. L\u2019exploration des votes reste publique.'); return; } const v=votes.find(x=>x.id===id); if(dir>0) v.for++; else v.against++; voted[id]=true; renderVotes(); toast('Vote enregistré pour « '+v.title.slice(0,42)+'... » — merci '+currentUser.name+'.'); }
+const LEADERS=[{n:'lea.dev',c:214,role:'Core omega',g:'from-violet-400 to-fuchsia-400'},{n:'mateo.k',c:148,role:'Plugins et intégrations',g:'from-emerald-300 to-cyan-400'},{n:'amina.s',c:121,role:'Builder Pro',g:'from-amber-300 to-orange-400'},{n:'jules.r',c:98,role:'Relecture de code',g:'from-sky-300 to-violet-400'},{n:'nina.p',c:87,role:'Documentation',g:'from-rose-300 to-amber-300'}];
+document.getElementById('leaderboard').innerHTML = LEADERS.map((l,i)=>'<div class="flex items-center gap-3 bg-white/[0.04] border border-white/8 rounded-2xl p-3"><span class="font-display font-bold text-white/35 w-5 text-center">'+(i+1)+'</span><span class="w-10 h-10 rounded-full bg-gradient-to-br '+l.g+' grid place-items-center text-[11px] font-bold text-black shrink-0">'+l.n.slice(0,2).toUpperCase()+'</span><div class="flex-1 min-w-0"><p class="font-bold text-sm flex items-center gap-1.5 truncate">'+l.n+' <span class="verified" style="width:14px;height:14px;font-size:8px">✓</span></p><p class="text-xs text-white/45 truncate">'+l.role+'</p></div><span class="text-right shrink-0"><span class="font-display font-bold">'+l.c+'</span><span class="block text-[10px] font-mono text-white/40 tracking-wider">CONTRIB.</span></span></div>').join('');
+function submitContrib(e){ e.preventDefault(); if(!currentUser){ openAuth('Connexion requise pour soumettre une contribution. Le programme reste consultable publiquement.'); return; } const title=document.getElementById('cTitle').value.trim(); votes.unshift({id:Date.now(),title:title,author:currentUser.name,for:1,against:0,ends:'Se termine dans 7 jours',tags:document.getElementById('cType').value}); renderVotes(); toast('Contribution « '+title.slice(0,38)+' » soumise par '+currentUser.name+' — en attente d\u2019approbation.'); document.getElementById('cTitle').value=''; document.getElementById('cDesc').value=''; document.getElementById('voteZone').scrollIntoView({behavior:'smooth'}); }
+
+// ---------- INIT ----------
+renderApiCards(); renderModels(); renderFiles(); openFile(currentFile); renderPlugins(); renderBuilder(); renderVotes(); updateAuthUI(); tickTerminal();
+(function(){ const h=location.hash.replace('#',''); if(h && document.getElementById('page-'+h)) showPage(h); })();
+</script>
+</body>
+</html>
